@@ -26,6 +26,8 @@
 
     margin-top: 20px;
     margin-bottom: 20px;
+
+    font-weight: bold;
 }
 
 
@@ -40,5 +42,6 @@
     height: 475px;
 
     border-radius: 10px;
-    background-color: rgba(159, 212, 233, 0.5);
+    /* box-shadow: 0 2px 4px rgba(0,0,0,0.4); */
+    background-color: rgba(153, 130, 96, 0.5);
 }
