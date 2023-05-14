@@ -19,7 +19,7 @@ body {
 }
 
 #title_content {
-    font-size: 40px;
+    font-size: 50px;
     font-weight: bold;
 }
 
@@ -27,6 +27,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
 }
 
 #btn_content{
@@ -50,8 +51,8 @@ body {
     width: 100%;
     /* text-align: center; */
 
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
     font-weight: bold;
 }
@@ -64,10 +65,22 @@ body {
 }
 
 #body_content {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(4,1fr);
+    gap: 15px;
+    padding: 15px;
+    box-sizing: border-box;
+
     width: 475px;
     height: 475px;
 
     border-radius: 10px;
     /* box-shadow: 0 2px 4px rgba(0,0,0,0.4); */
-    background-color: rgba(128, 104, 61, 0.5);
+    background-color: rgba(87, 59, 8, 0.5);
+}
+
+#squares {
+    background-color: rgba(240, 225, 200, 0.767);
+    border-radius: 10px;
 }

@@ -66,6 +66,8 @@ function cubeCreate(n) {
     // n代表生成方块的数量 开始两个正常一个
     // 生成方块的值可能是2^1也可能是2^2
 
+    // 方块的值不同，颜色也不同
+
     
 }
 
@@ -84,18 +86,28 @@ function scoreCal() {
 
 // 程序主函数
 function gameStart() {
+    console.log('gameStart');
 
     // 初始化棋盘
     init();
 
     // 每次检测到一个滑动的操作都调用一次滑动的函数
+    slide();
 
+    // 如果按了重新开始按钮就进行初始化
+    init();
 
-    // 先对游戏进行初始化
 }
 
-// 页面加载完成后开始游戏
+// 页面加载完成后自动开始游戏
 
+// document.addEventListener("DOMContentLoaded",function() {
+//     gameStart();
+// })
+
+window.onload = function () {
+    gameStart();
+}
 
 
 // 高级功能：
@@ -104,4 +116,3 @@ function gameStart() {
 // 排行榜？
 // 做手机的适配
 // 实现微信小程序搭载
-
