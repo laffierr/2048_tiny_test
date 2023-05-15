@@ -81,8 +81,30 @@ function cubeCreate() {
 
     // 方块的值不同，颜色也不同
 
-    // 首先在数组里随机选一个位置
+    // 首先在数组里随机选一个空位置
+    // 遍历所有的空位置，并用一个数组存储起来
+    const emptyLoc = [];
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            if (gameBox[i][j] === 0) {
+                emptyLoc.push({row:i, col: j});
+            }
+        }
+    }
+    // 随机选择其中一个
+    const randomLoc = Math.floor(Math.random() * emptyLoc.length);
+    // Math.random作用是选择0~1之间的随机小数
+    // 它和空数组长度相乘就能得到一个0~空数组长度中间的一个小数
+    // Math.floor意思是向下取整 得到一个整数
+    const {row,col} = emptyLoc[randomLoc];
+
     // 随机生成一个值2或者4
+    const newVal = Math.random() < 0.8 ? 1 : 2;
+
+    // 将值赋给对应位置
+    gameBox[row][col] = newVal;
+
+    // console.log(gameBox);
 
     // 实现数组中值和方块的绑定
     
