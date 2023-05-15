@@ -20,6 +20,7 @@ function init() {
     gameOver = false;
 
     cubeCreate();
+    cubeCreate();
     // 游戏开始：在随机两个位置生成两个方块
 }
 
@@ -104,9 +105,24 @@ function cubeCreate() {
     // 将值赋给对应位置
     gameBox[row][col] = newVal;
 
-    // console.log(gameBox);
+    console.log(gameBox);
 
     // 实现数组中值和方块的绑定
+
+    const square = document.createElement('div');
+    square.classList.add('square');
+    const board = document.getElementById('square_container');
+    board.appendChild(square);
+
+    console.log(row,col);
+
+    square.style.top = 10 + 120 * row + "px";
+    square.style.left = 10 + 120 * col + "px";
+
+    square.innerHTML = Math.pow(2,newVal);
+
+    // 第一行就是10 第二行10 + 120
+
     
 }
 
@@ -186,7 +202,7 @@ function gameStart() {
 
     // 每次检测到一个滑动的操作都调用一次滑动的函数
     // document.addEventListener()
-    slide();
+    // slide();
 
     // 如果按了重新开始按钮就进行初始化
     restart.addEventListener('click',function () {
