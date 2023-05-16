@@ -12,7 +12,7 @@ function init() {
     // 初始化函数
     // 将数组归零
 
-    // Yable:Initialize the gameBox array
+    // Yable: Initialize the gameBox array
     gameBox.length = 0; // This will clear the array
 
     for (let i = 0; i < 4; i++) {
