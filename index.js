@@ -9,6 +9,10 @@ const restart = document.getElementById('btn_content');
 function init() {
     // 初始化函数
     // 将数组归零
+
+    // Yable: Initialize the gameBox array
+    gameBox.length = 0; // This will clear the array
+
     for (let i = 0; i < 4; i++) {
         const row = [];
         for (let j = 0; j < 4; j++) {
@@ -18,6 +22,12 @@ function init() {
     }
     // console.log(gameBox);
     gameOver = false;
+
+    //Yable: Clear the game board in UI
+    const board = document.getElementById('square_container');
+    while (board.firstChild) {
+        board.removeChild(board.firstChild);
+    }
 
     cubeCreate();
     cubeCreate();
