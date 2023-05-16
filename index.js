@@ -5,10 +5,16 @@ var score = 0;
 var gameOver = false;
 
 const restart = document.getElementById('btn_content');
+const board = document.getElementById('square_container');
+
 
 function init() {
     // 初始化函数
     // 将数组归零
+
+    // Yable:Initialize the gameBox array
+    gameBox.length = 0; // This will clear the array
+
     for (let i = 0; i < 4; i++) {
         const row = [];
         for (let j = 0; j < 4; j++) {
@@ -17,16 +23,32 @@ function init() {
         gameBox[i] = row;
     }
     // console.log(gameBox);
+
+    // 清除棋盘
+    // while (board.firstChild) {
+    //     // board.removeChild(board.firstChild);
+    // }
+
+    // 得分重置为0
+    score = 0;
+
+    // 游戏状态设置为未结束
     gameOver = false;
 
-    cubeCreate();
-    cubeCreate();
+    // Yable: Clear the game board in UI
+    const board = document.getElementById('square_container');
+    while(board.firstChild) {
+        board.removeChild(board.firstChild);
+    }
+
+    squareCreate();
+    squareCreate();
     // 游戏开始：在随机两个位置生成两个方块
 }
 
 
 // 游戏过程：方块的滑动：
-function slide() {
+function slide(event) {
     // 方块滑动的函数
     // 接收用户的输入并进行方块动作，分数计算，场景刷新，新方块生成
 
@@ -36,10 +58,9 @@ function slide() {
     // 向左划
     // 向右划
 
-    // 向上划和向下划一类
-    // 向左划和向右划一类
-
     // 计算场景布局
+
+
     // 方块的合并：划动后朝着滑动方向的最远端开始遍历，如果有相同的就合并 并放到能放的首位
     // 方块的移动：按顺序进位
     // 实现原理：每次向某个方向划的时候 水平划就是行 垂直划就是列
@@ -49,7 +70,7 @@ function slide() {
 
     // 方块生成
     // 每滑动一次之后在空余 也就是值为0的区域里生成一个方块
-    cubeCreate();
+    squareCreate();
 
     // 场景刷新
     // 给方块的滑动绑定对应的事件和动画 方块合并的动画
@@ -72,10 +93,18 @@ function slide() {
             init();
         })
     }
+    
 
 }
 
-function cubeCreate() {
+class Square {
+    constructor () {
+        this.value = value;
+        this.element = element;
+    }
+}
+
+function squareCreate() {
     // 生成方块的函数
     // n代表生成方块的数量 开始两个正常一个
     // 生成方块的值可能是2^1也可能是2^2
@@ -100,31 +129,32 @@ function cubeCreate() {
     const {row,col} = emptyLoc[randomLoc];
 
     // 随机生成一个值2或者4
-    const newVal = Math.random() < 0.8 ? 1 : 2;
+    const squareValue = Math.random() < 0.8 ? 1 : 2;
 
     // 将值赋给对应位置
-    gameBox[row][col] = newVal;
+    gameBox[row][col] = squareValue;
 
     console.log(gameBox);
 
     // 实现数组中值和方块的绑定
+    // 通过创建方块对象来实现
 
-    const square = document.createElement('div');
-    square.classList.add('square');
-    const board = document.getElementById('square_container');
-    board.appendChild(square);
+    const squareElement = document.createElement('div');
+    squareElement.classList.add('squareElement');
+    board.appendChild(squareElement);
+    squareElement.textContent = Math.pow(2,squareValue);;
+
+    // squareElement是元素 square是对象
+    const square = new Square(squareValue,squareElement);
+    squareElement.square = square;
 
     console.log(row,col);
 
-    square.style.top = 10 + 120 * row + "px";
-    square.style.left = 10 + 120 * col + "px";
-
-    square.innerHTML = Math.pow(2,newVal);
-
-    // 第一行就是10 第二行10 + 120
-
-    
+    squareElement.style.top = 120 * row + "px";
+    squareElement.style.left = 120 * col + "px";
+   
 }
+
 
 // 更新游戏面板
 function boxRef() {
@@ -201,8 +231,32 @@ function gameStart() {
     init();
 
     // 每次检测到一个滑动的操作都调用一次滑动的函数
-    // document.addEventListener()
-    // slide();
+    document.addEventListener('keydown',function (event) {
+        let ifslide = true;
+        if (event.key === 'ArrowLeft') {
+            console.log('L');
+        }
+        else if (event.key === 'ArrowUp') {
+            console.log('U');
+        }
+        else if (event.key === 'ArrowDown') {
+            console.log('D');
+        }
+        else if (event.key === 'ArrowRight') {
+            console.log('R');
+        }
+        else {
+            ifslide = false;
+        }
+
+        if (ifslide) {
+            slide();
+        }
+    })
+
+    // 向上划和向下划一类
+    // 向左划和向右划一类
+
 
     // 如果按了重新开始按钮就进行初始化
     restart.addEventListener('click',function () {
