@@ -98,7 +98,7 @@ function slide(event) {
 }
 
 class Square {
-    constructor () {
+    constructor (value,element) {
         this.value = value;
         this.element = element;
     }
