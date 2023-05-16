@@ -87,7 +87,11 @@ function squareCreate() {
     // 如果不存在空位置则游戏结束
     if (emptyLoc.length === 0) {
         gameOver = true;
+        //Yable: Dispatch a keydown event with the 'r' key
+        const event = new KeyboardEvent('keydown', { key: 'r' });
+        document.dispatchEvent(event);
         return;
+    
 
     }
     // 随机选择其中一个
@@ -116,8 +120,7 @@ function squareCreate() {
     // 测试用输出
     console.log(gameBox);
     // console.log(row,col);
-    console.log(square);
-   
+    console.log(square)
 }
 
 
@@ -134,39 +137,8 @@ function gameStart() {
     // 初始化棋盘
     init();
 
-    handleKeydown();
-
-    // // 每次检测到一个滑动的操作都调用一次滑动的函数
-    // document.addEventListener('keydown',function (event) {
-    //     let ifslide = true;
-    //     // 按Rremake
-    //     if (event.key === 'r' || event.key === 'R') {
-    //         console.log('restart');
-    //         init();
-    //     }
-    //     else if (event.key === 'ArrowLeft') {
-    //         console.log('L');
-    //     }
-    //     else if (event.key === 'ArrowUp') {
-    //         console.log('U');
-    //     }
-    //     else if (event.key === 'ArrowDown') {
-    //         console.log('D');
-    //     }
-    //     else if (event.key === 'ArrowRight') {
-    //         console.log('R');
-    //     }
-    //     else {
-    //         ifslide = false;
-    //     }
-
-    //     if (ifslide) {
-    //         slide();
-    //     }
-    // })
-    // document.addEventListener('keydown',slide)
-
-    
+    document.addEventListener('keydown',handleKeydown);
+    // handleKeydown();    
 
     // 向上划和向下划一类
     // 向左划和向右划一类
@@ -177,124 +149,106 @@ function gameStart() {
         init();
     })
 
-
-    // document.addEventListener('keydown',function (event) {
-    //     if (event.key === 'r' || event.key === 'R') {
-    //         console.log('restart');
-    //         init();
-    //     }
-    // })
-
 }
 
+//Yable: Create a function handling keydown
 function handleKeydown(event) {
-    let ifslide = true;
-    // 按Rremake
-    if (event.key === 'r' || event.key === 'R') {
+    // If the game is over and the 'r' key was pressed, restart the game
+    if (gameOver) {
+        gameStart();
         console.log('restart');
-        init();
-    }
-    else if (event.key === 'ArrowLeft') {
-        console.log('L');
-    }
-    else if (event.key === 'ArrowUp') {
-        console.log('U');
-    }
-    else if (event.key === 'ArrowDown') {
-        console.log('D');
-    }
-    else if (event.key === 'ArrowRight') {
-        console.log('R');
+    } 
+    //Yable edit: move out the && (event.key === 'r' || event.key === 'R') part and make it independent
+    if (event.key === 'r' || event.key === 'R') {
+        gameStart();
+        console.log('restart');
     }
     else {
-        ifslide = false;
-    }
+        // Handle other key presses
+        let ifslide = true;
+        if (event.key === 'ArrowLeft') {
+            console.log('L');
+        }
+        else if (event.key === 'ArrowUp') {
+            console.log('U');
+        }
+        else if (event.key === 'ArrowDown') {
+            console.log('D');
+        }
+        else if (event.key === 'ArrowRight') {
+            console.log('R');
+        }
+        else {
+            ifslide = false;
+        }
 
-    if (ifslide) {
-        slide();
+        if (ifslide) {
+            slide();
+        }
     }
 }
-
 
 // 游戏过程：方块的滑动：
 function slide(event) {
     console.log('slide');
 
+    // 方块滑动的函数
+    // 接收用户的输入并进行方块动作，分数计算，场景刷新，新方块生成
+
+    // 接收用户输入：
+    // 向上划
+    // 向下划
+    // 向左划
+    // 向右划
+    // 计算场景布局
 
 
-    // let ifslide = true;
-    // if (event.key === 'ArrowLeft') {
-    //     console.log('L');
-    // }
-    // else if (event.key === 'ArrowUp') {
-    //     console.log('U');
-    // }
-    // else if (event.key === 'ArrowDown') {
-    //     console.log('D');
-    // }
-    // else if (event.key === 'ArrowRight') {
-    //     console.log('R');
-    // }
-    // else {
-    //     ifslide = false;
-    // }
+    // 方块的合并：划动后朝着滑动方向的最远端开始遍历，如果有相同的就合并 并放到能放的首位
+    // 方块的移动：按顺序进位
+    // 实现原理：每次向某个方向划的时候 水平划就是行 垂直划就是列
 
-    // if (ifslide) {
-        // 方块滑动的函数
-        // 接收用户的输入并进行方块动作，分数计算，场景刷新，新方块生成
+    // 判断滑动是否有有效：是否能造成方块合并
+    // 如果滑动无效则不算滑动
 
-        // 接收用户输入：
-        // 向上划
-        // 向下划
-        // 向左划
-        // 向右划
-
-        // 计算场景布局
+    // 方块生成
+    // 每滑动一次之后在空余 也就是值为0的区域里生成一个方块
+    squareCreate();
 
 
-        // 方块的合并：划动后朝着滑动方向的最远端开始遍历，如果有相同的就合并 并放到能放的首位
-        // 方块的移动：按顺序进位
-        // 实现原理：每次向某个方向划的时候 水平划就是行 垂直划就是列
+    // 场景刷新
+    // 给方块的滑动绑定对应的事件和动画 方块合并的动画
+    boxRef();
+
+    // 分数计算
+    scoreCal();
+
+    // 判断游戏是否结束
+    ifGameOver();  
+
+    // 游戏结束后操作
+    if (gameOver) {
+        console.log('Game Over!!!');
+        console.log(gameOver);
+
+        //Yable: Remove the previous event listener
+        document.removeEventListener('keydown', handleKeydown);
+        //Yable: Attach a new event listener
+        document.addEventListener('keydown', gameStart());
+                
+        // 将整个游戏部分加上一层模糊 上面写 游戏结束
 
         // 判断滑动是否有有效：是否能造成方块合并
         // 如果滑动无效则不算滑动
 
-        // 方块生成
-        // 每滑动一次之后在空余 也就是值为0的区域里生成一个方块
-        squareCreate();
+        // 游戏结束 重新开始 随便按一个键重新初始化
+        /*document.addEventListener('keydown',function() {
+            gameStart();
+            console.log('restart');
+        })*/
+    }
 
-        // 场景刷新
-        // 给方块的滑动绑定对应的事件和动画 方块合并的动画
-        boxRef();
-
-        // 分数计算
-        scoreCal();
-
-        // 判断游戏是否结束
-        ifGameOver();  
-
-        // 游戏结束后操作
-        if (gameOver) {
-            console.log('Game Over!!!');
-            console.log(gameOver);
-            // 将整个游戏部分加上一层模糊 上面写 游戏结束
-
-            // 记录本次分数 上传到排行榜 待定 
-
-
-
-            // 游戏结束 重新开始 随便按一个键重新初始化
-            document.addEventListener('keydown',function() {
-                console.log('restart');
-                document.removeEventListener('keydown',)
-                gameStart();
-            },true)
-        }
-
-        // return;
-        // }
-
-
+    // return;
+    // }
     
 }
 
@@ -329,29 +283,36 @@ function ifGameOver() {
         for (let row = 0; row < 4; row ++){
             for (let col = 0; col < 4; col++) {
                 // 检查方块上方
+                //Yable: For your ifGameOver function, 
+                //you're checking if the board is filled 
+                //and then if there are no available moves. 
+                //However, you're using strict equality (===) to compare objects, 
+                //which only returns true if they are the same object, 
+                //not if they have the same value. 
+                //You should compare the value property of the Square objects instead.
                 if (row > 0) {
-                    if (gameBox[row][col].value === gameBox[row - 1][col]) {
+                    if (gameBox[row][col].value === gameBox[row - 1][col].value) {
                         noRep = false;
                         break;
                     }
                 }
                 // 检查方块下方
                 if (row < 3) {
-                    if (gameBox[row][col] === gameBox[row + 1][col]) {
+                    if (gameBox[row][col].value === gameBox[row + 1][col].value) {
                         noRep = false;
                         break;
                     }
                 }
                 // 检查方块左侧
                 if (col > 0) {
-                    if (gameBox[row][col] === gameBox[row][col - 1]) {
+                    if (gameBox[row][col].value === gameBox[row][col - 1].value) {
                         noRep = false;
                         break;
                     }
                 }
                 // 检查方块右侧
                 if (col < 3) {
-                    if (gameBox[row][col] === gameBox[row][col + 1]) {
+                    if (gameBox[row][col].value === gameBox[row][col + 1].value) {
                         noRep = false;
                         break;
                     }
@@ -367,7 +328,6 @@ function ifGameOver() {
     }
 }
 
-
 // 高级功能：
 
 // 做手机的适配：：：最优先
@@ -378,4 +338,4 @@ function ifGameOver() {
 // 优化判断游戏是否结束的遍历算法
 // 保存每次游玩的进度
 // 实现分数上传功能
-// 最高分？
+// 最高分?
