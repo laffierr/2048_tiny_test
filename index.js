@@ -87,7 +87,11 @@ function squareCreate() {
     // 如果不存在空位置则游戏结束
     if (emptyLoc.length === 0) {
         gameOver = true;
+        //Yable: Dispatch a keydown event with the 'r' key
+        const event = new KeyboardEvent('keydown', { key: 'r' });
+        document.dispatchEvent(event);
         return;
+    
 
     }
     // 随机选择其中一个
@@ -116,8 +120,7 @@ function squareCreate() {
     // 测试用输出
     console.log(gameBox);
     // console.log(row,col);
-    console.log(square);
-   
+    console.log(square)
 }
 
 // 游戏过程：方块的滑动：
@@ -160,15 +163,21 @@ function slide(event) {
     if (gameOver) {
         console.log('Game Over!!!');
         console.log(gameOver);
+
+        //Yable: Remove the previous event listener
+        document.removeEventListener('keydown', handleKeydown);
+        //Yable: Attach a new event listener
+        document.addEventListener('keydown', gameStart());
+                
         // 将整个游戏部分加上一层模糊 上面写 游戏结束
 
         // 记录本次分数 上传到排行榜 待定 
 
         // 游戏结束 重新开始 随便按一个键重新初始化
-        document.addEventListener('keydown',function() {
+        /*document.addEventListener('keydown',function() {
             gameStart();
             console.log('restart');
-        })
+        })*/
     }
 
     return;
@@ -205,29 +214,36 @@ function ifGameOver() {
         for (let row = 0; row < 4; row ++){
             for (let col = 0; col < 4; col++) {
                 // 检查方块上方
+                //Yable: For your ifGameOver function, 
+                //you're checking if the board is filled 
+                //and then if there are no available moves. 
+                //However, you're using strict equality (===) to compare objects, 
+                //which only returns true if they are the same object, 
+                //not if they have the same value. 
+                //You should compare the value property of the Square objects instead.
                 if (row > 0) {
-                    if (gameBox[row][col] === gameBox[row - 1][col]) {
+                    if (gameBox[row][col].value === gameBox[row - 1][col].value) {
                         noRep = false;
                         break;
                     }
                 }
                 // 检查方块下方
                 if (row < 3) {
-                    if (gameBox[row][col] === gameBox[row + 1][col]) {
+                    if (gameBox[row][col].value === gameBox[row + 1][col].value) {
                         noRep = false;
                         break;
                     }
                 }
                 // 检查方块左侧
                 if (col > 0) {
-                    if (gameBox[row][col] === gameBox[row][col - 1]) {
+                    if (gameBox[row][col].value === gameBox[row][col - 1].value) {
                         noRep = false;
                         break;
                     }
                 }
                 // 检查方块右侧
                 if (col < 3) {
-                    if (gameBox[row][col] === gameBox[row][col + 1]) {
+                    if (gameBox[row][col].value === gameBox[row][col + 1].value) {
                         noRep = false;
                         break;
                     }
@@ -243,6 +259,43 @@ function ifGameOver() {
     }
 }
 
+//Yable: Create a function handling keydown
+function handleKeydown(event) {
+    // If the game is over and the 'r' key was pressed, restart the game
+    if (gameOver) {
+        gameStart();
+        console.log('restart');
+    } 
+    //Yable edit: move out the && (event.key === 'r' || event.key === 'R') part and make it independent
+    if (event.key === 'r' || event.key === 'R') {
+        gameStart();
+        console.log('restart');
+    }
+    else {
+        // Handle other key presses
+        let ifslide = true;
+        if (event.key === 'ArrowLeft') {
+            console.log('L');
+        }
+        else if (event.key === 'ArrowUp') {
+            console.log('U');
+        }
+        else if (event.key === 'ArrowDown') {
+            console.log('D');
+        }
+        else if (event.key === 'ArrowRight') {
+            console.log('R');
+        }
+        else {
+            ifslide = false;
+        }
+
+        if (ifslide) {
+            slide();
+        }
+    }
+}
+
 // 程序主函数
 function gameStart() {
     console.log('gameStart');
@@ -250,8 +303,11 @@ function gameStart() {
     // 初始化棋盘
     init();
 
+    //Yable: Attach the keydown event listener
+    document.addEventListener('keydown', handleKeydown);
+
     // 每次检测到一个滑动的操作都调用一次滑动的函数
-    document.addEventListener('keydown',function (event) {
+    /*document.addEventListener('keydown',function (event) {
         let ifslide = true;
         if (event.key === 'ArrowLeft') {
             console.log('L');
@@ -276,13 +332,13 @@ function gameStart() {
 
     // 向上划和向下划一类
     // 向左划和向右划一类
-
+*/
     // 如果按了重新开始按钮就进行初始化
     restart.addEventListener('click',function () {
         console.log('restart');
         init();
     })
-
+/*
     // 按Rremake
     document.addEventListener('keydown',function (event) {
         if (event.key === 'r' || event.key === 'R') {
@@ -293,7 +349,7 @@ function gameStart() {
 
 
     
-
+*/
 }
 
 // 页面加载完成后自动开始游戏
@@ -312,4 +368,4 @@ window.onload = function () {
 // 优化判断游戏是否结束的遍历算法
 // 保存每次游玩的进度
 // 实现分数上传功能
-// 最高分？
+// 最高分?
