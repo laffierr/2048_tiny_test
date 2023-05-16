@@ -210,7 +210,13 @@ function ifGameOver() {
         for (let row = 0; row < 4; row ++){
             for (let col = 0; col < 4; col++) {
                 // 检查方块上方
-                //Yable: 
+                //Yable: For your ifGameOver function, 
+                //you're checking if the board is filled 
+                //and then if there are no available moves. 
+                //However, you're using strict equality (===) to compare objects, 
+                //which only returns true if they are the same object, 
+                //not if they have the same value. 
+                //You should compare the value property of the Square objects instead.
                 if (row > 0) {
                     if (gameBox[row][col].value === gameBox[row - 1][col].value) {
                         noRep = false;
