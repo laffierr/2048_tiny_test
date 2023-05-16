@@ -97,10 +97,13 @@ function slide(event) {
 
 }
 
+// 创建方块对象
 class Square {
-    constructor (value,element) {
+    constructor (value,element,row,col) {
         this.value = value;
         this.element = element;
+        this.row = row;
+        this.col = col;
     }
 }
 
@@ -139,16 +142,19 @@ function squareCreate() {
     // 实现数组中值和方块的绑定
     // 通过创建方块对象来实现
 
+    // 在html里生成子元素
     const squareElement = document.createElement('div');
+    // 给子元素添加类名使其能调用css样式
     squareElement.classList.add('squareElement');
     board.appendChild(squareElement);
     squareElement.textContent = Math.pow(2,squareValue);;
 
     // squareElement是元素 square是对象
-    const square = new Square(squareValue,squareElement);
+    const square = new Square(squareValue,squareElement,row,col);
     squareElement.square = square;
 
     console.log(row,col);
+    console.log(square);
 
     squareElement.style.top = 120 * row + "px";
     squareElement.style.left = 120 * col + "px";
@@ -281,9 +287,13 @@ window.onload = function () {
 
 
 // 高级功能：
+
+// 做手机的适配：：：最优先
+
+// 实现微信小程序搭载
+// 实现陀螺仪调用
+
 // 优化判断游戏是否结束的遍历算法
 // 保存每次游玩的进度
 // 实现分数上传功能
 // 排行榜？
-// 做手机的适配
-// 实现微信小程序搭载
