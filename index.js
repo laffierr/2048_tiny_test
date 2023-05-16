@@ -7,27 +7,46 @@ var gameOver = false;
 const restart = document.getElementById('btn_content');
 const board = document.getElementById('square_container');
 
+// 创建方块对象
+// 对象名：square
+class Square {
+    constructor (value,element,row,col) {
+        this.value = value;
+        this.element = element;
+        this.row = row;
+        this.col = col;
+    }
+}
 
 function init() {
     // 初始化函数
     // 将数组归零
 
+    // 是不是应该先创建两个对象 然后把他们分配到相应的位置？
+    // 也就是说我需要一个创建对象的函数，一个分配位置的函数
+
+    // 合并时不生成新的对象，而是将其中一个对象的值改变
+
     // Yable: Initialize the gameBox array
     gameBox.length = 0; // This will clear the array
 
+    // 重置棋盘
     for (let i = 0; i < 4; i++) {
         const row = [];
         for (let j = 0; j < 4; j++) {
-            row.push(0);
+            row.push(null);
         }
         gameBox[i] = row;
     }
-    // console.log(gameBox);
+    // Yable: Clear the game board in UI
+    const board = document.getElementById('square_container');
+    while(board.firstChild) {
+        board.removeChild(board.firstChild);
+    }
 
-    // 清除棋盘
-    // while (board.firstChild) {
-    //     // board.removeChild(board.firstChild);
-    // }
+    // 生成两个方块
+    squareCreate();
+    squareCreate();
 
     // 得分重置为0
     score = 0;
@@ -35,20 +54,75 @@ function init() {
     // 游戏状态设置为未结束
     gameOver = false;
 
-    // Yable: Clear the game board in UI
-    const board = document.getElementById('square_container');
-    while(board.firstChild) {
-        board.removeChild(board.firstChild);
-    }
+    console.log('init');
 
-    squareCreate();
-    squareCreate();
-    // 游戏开始：在随机两个位置生成两个方块
 }
 
+// 生成方块的函数
+function squareCreate() {
+
+    // 在html里生成子元素
+    const squareElement = document.createElement('div');
+    // 给子元素添加类名使其能调用css样式
+    squareElement.classList.add('squareElement');
+    board.appendChild(squareElement);
+
+    // 随机生成一个值2或者4并给方块赋值
+    const squareValue = Math.random() < 0.8 ? 1 : 2;
+
+    squareElement.textContent = Math.pow(2,squareValue);
+
+    // 方块的值不同，颜色也不同
+
+    // 在数组里随机选一个空位置
+    // 遍历所有的空位置，并用一个数组存储起来
+    const emptyLoc = [];
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            if (gameBox[i][j] === null) {
+                emptyLoc.push({row:i, col: j});
+            }
+        }
+    }
+    // 如果不存在空位置则游戏结束
+    if (emptyLoc.length === 0) {
+        gameOver = true;
+        return;
+
+    }
+    // 随机选择其中一个
+    const randomLoc = Math.floor(Math.random() * emptyLoc.length);
+    // Math.random作用是选择0~1之间的随机小数
+    // 它和空数组长度相乘就能得到一个0~空数组长度中间的一个小数
+    // Math.floor意思是向下取整 得到一个整数
+    const {row,col} = emptyLoc[randomLoc];
+
+
+    // value有了 element有了 行列有了 可以生成对象了
+    const square = new Square(squareValue,squareElement,row,col);
+    
+    // squareElement是元素 square是对象
+    // 创建一个新Square对象square
+    squareElement.square = square;
+
+
+    // 将对象放置在对应位置
+    // 在gameBox的位置
+    gameBox[row][col] = square;
+    // 在Html中的位置
+    squareElement.style.top = 120 * square.row + "px";
+    squareElement.style.left = 120 * square.col + "px";
+
+    // 测试用输出
+    console.log(gameBox);
+    // console.log(row,col);
+    console.log(square);
+   
+}
 
 // 游戏过程：方块的滑动：
 function slide(event) {
+    console.log('slide');
     // 方块滑动的函数
     // 接收用户的输入并进行方块动作，分数计算，场景刷新，新方块生成
 
@@ -80,87 +154,25 @@ function slide(event) {
     scoreCal();
 
     // 判断游戏是否结束
-    ifGameOver();
+    ifGameOver();  
 
     // 游戏结束后操作
     if (gameOver) {
+        console.log('Game Over!!!');
+        console.log(gameOver);
         // 将整个游戏部分加上一层模糊 上面写 游戏结束
 
         // 记录本次分数 上传到排行榜 待定 
 
         // 游戏结束 重新开始 随便按一个键重新初始化
         document.addEventListener('keydown',function() {
-            init();
+            gameStart();
+            console.log('restart');
         })
     }
-    
 
+    return;
 }
-
-// 创建方块对象
-class Square {
-    constructor (value,element,row,col) {
-        this.value = value;
-        this.element = element;
-        this.row = row;
-        this.col = col;
-    }
-}
-
-function squareCreate() {
-    // 生成方块的函数
-    // n代表生成方块的数量 开始两个正常一个
-    // 生成方块的值可能是2^1也可能是2^2
-
-    // 方块的值不同，颜色也不同
-
-    // 首先在数组里随机选一个空位置
-    // 遍历所有的空位置，并用一个数组存储起来
-    const emptyLoc = [];
-    for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < 4; j++) {
-            if (gameBox[i][j] === 0) {
-                emptyLoc.push({row:i, col: j});
-            }
-        }
-    }
-    // 随机选择其中一个
-    const randomLoc = Math.floor(Math.random() * emptyLoc.length);
-    // Math.random作用是选择0~1之间的随机小数
-    // 它和空数组长度相乘就能得到一个0~空数组长度中间的一个小数
-    // Math.floor意思是向下取整 得到一个整数
-    const {row,col} = emptyLoc[randomLoc];
-
-    // 随机生成一个值2或者4
-    const squareValue = Math.random() < 0.8 ? 1 : 2;
-
-    // 将值赋给对应位置
-    gameBox[row][col] = squareValue;
-
-    console.log(gameBox);
-
-    // 实现数组中值和方块的绑定
-    // 通过创建方块对象来实现
-
-    // 在html里生成子元素
-    const squareElement = document.createElement('div');
-    // 给子元素添加类名使其能调用css样式
-    squareElement.classList.add('squareElement');
-    board.appendChild(squareElement);
-    squareElement.textContent = Math.pow(2,squareValue);;
-
-    // squareElement是元素 square是对象
-    const square = new Square(squareValue,squareElement,row,col);
-    squareElement.square = square;
-
-    console.log(row,col);
-    console.log(square);
-
-    squareElement.style.top = 120 * row + "px";
-    squareElement.style.left = 120 * col + "px";
-   
-}
-
 
 // 更新游戏面板
 function boxRef() {
@@ -179,15 +191,15 @@ function ifGameOver() {
     // 先遍历吧
 
     // 首先判断数组是否还存在0    
-    let no0 = true;
+    let noNull = true;
     for(let i = 0; i < 4; i++) {
         for (let j = 0; j< 4; j++) {
-            if (gameBox[i][j] == 0) {
-                no0 = false;
+            if (gameBox[i][j] === null) {
+                noNull = false;
             }
         }
     }
-    if(no0) {
+    if(noNull) {
         // 其次判断生成方块后每个方块周围四格都没有和其值相同的方块
         let noRep = true;
         for (let row = 0; row < 4; row ++){
@@ -224,6 +236,8 @@ function ifGameOver() {
         }
         if (noRep) {
             gameOver = true;
+            console.log('Game Over!!!');
+            console.log(gameOver);
             return;
         }
     }
@@ -263,7 +277,6 @@ function gameStart() {
     // 向上划和向下划一类
     // 向左划和向右划一类
 
-
     // 如果按了重新开始按钮就进行初始化
     restart.addEventListener('click',function () {
         console.log('restart');
@@ -277,6 +290,9 @@ function gameStart() {
             init();
         }
     })
+
+
+    
 
 }
 
@@ -296,4 +312,4 @@ window.onload = function () {
 // 优化判断游戏是否结束的遍历算法
 // 保存每次游玩的进度
 // 实现分数上传功能
-// 排行榜？
+// 最高分？
