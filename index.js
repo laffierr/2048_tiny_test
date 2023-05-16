@@ -87,7 +87,11 @@ function squareCreate() {
     // 如果不存在空位置则游戏结束
     if (emptyLoc.length === 0) {
         gameOver = true;
+        //Yable: Dispatch a keydown event with the 'r' key
+        const event = new KeyboardEvent('keydown', { key: 'r' });
+        document.dispatchEvent(event);
         return;
+    
 
     }
     // 随机选择其中一个
@@ -258,10 +262,16 @@ function ifGameOver() {
 //Yable: Create a function handling keydown
 function handleKeydown(event) {
     // If the game is over and the 'r' key was pressed, restart the game
-    if (gameOver && (event.key === 'r' || event.key === 'R')) {
+    if (gameOver) {
         gameStart();
         console.log('restart');
-    } else {
+    } 
+    //Yable edit: move out the && (event.key === 'r' || event.key === 'R') part and make it independent
+    if (event.key === 'r' || event.key === 'R') {
+        gameStart();
+        console.log('restart');
+    }
+    else {
         // Handle other key presses
         let ifslide = true;
         if (event.key === 'ArrowLeft') {
