@@ -5,8 +5,11 @@ body {
 
     justify-content: center;
 
-    /* Prevent moving game board */
+    /* Prevent moving game board when swiping*/
     overflow: hidden;
+    /* Font style */
+    font-family: 'Roboto', sans-serif;
+    color: #2e1d04ee;
 }
 
 #title_container {
