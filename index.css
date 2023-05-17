@@ -4,6 +4,9 @@ body {
     height: 100%;
 
     justify-content: center;
+
+    /* Prevent moving game board */
+    overflow: hidden;
 }
 
 #title_container {
