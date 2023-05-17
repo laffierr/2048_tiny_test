@@ -60,8 +60,12 @@ function squareCreate() {
     // 在gameBox的位置
     index.gameBox[row][col] = square;
     // 在Html中的位置
-    squareElement.style.top = 120 * square.row + "px";
-    squareElement.style.left = 120 * square.col + "px";
+    // squareElement.style.top = 120 * square.row + "px";
+    // squareElement.style.left = 120 * square.col + "px";
+    const heightBody = document.getElementById('body_content').offsetHeight;
+    const widthBody = document.getElementById('body_content').offsetWidth;
+    squareElement.style.top = 0.24 * heightBody * square.row + "px";
+    squareElement.style.left = 0.24 * widthBody * square.col + "px";    
 
     // 测试用输出
     console.log(index.gameBox);
