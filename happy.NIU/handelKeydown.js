@@ -100,7 +100,8 @@ async function moveLeft() {
                 index.gameBox[row][col] = null;  // Remove the square from the current cell
                 currentSquare.col = targetCol;  // Update the square's column
                 // Update the square's position in the DOM
-                currentSquare.element.style.left = 120 * currentSquare.col + "px";
+                const widthBody = document.getElementById('body_content').offsetWidth;
+                currentSquare.element.style.left = 0.24 * widthBody * currentSquare.col + "px";
                 console.log("Moved to left!!!",index.gameBox)
                 }
             }
@@ -161,7 +162,8 @@ async function moveRight() {
                     index.gameBox[row][targetCol] = currentSquare;
                     index.gameBox[row][col] = null;
                     currentSquare.col = targetCol;
-                    currentSquare.element.style.left = 120 * currentSquare.col + "px";
+                    const widthBody = document.getElementById('body_content').offsetWidth;
+                    currentSquare.element.style.left = 0.24 * widthBody * currentSquare.col + "px";
                     console.log("Moved to right!!!", index.gameBox)
                 }
             }
@@ -220,7 +222,8 @@ async function moveUp() {
                     index.gameBox[targetRow][col] = currentSquare;
                     index.gameBox[row][col] = null;
                     currentSquare.row = targetRow;
-                    currentSquare.element.style.top = 120 * currentSquare.row + "px";
+                    const heightBody = document.getElementById('body_content').offsetHeight;
+                    currentSquare.element.style.top = 0.24 * heightBody * currentSquare.row + "px";
                     console.log("Moved upwards!!!", index.gameBox)
                 }
             }
@@ -279,7 +282,8 @@ async function moveDown() {
                     index.gameBox[targetRow][col] = currentSquare;
                     index.gameBox[row][col] = null;
                     currentSquare.row = targetRow;
-                    currentSquare.element.style.top = 120 * currentSquare.row + "px";
+                    const heightBody = document.getElementById('body_content').offsetHeight;
+                    currentSquare.element.style.top = 0.24 * heightBody * currentSquare.row + "px";
                     console.log("Moved downwards!!!", index.gameBox)
                 }
             }
