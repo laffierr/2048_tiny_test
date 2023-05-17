@@ -22,9 +22,6 @@ function init() {
     // 初始化函数
     // 将数组归零
 
-    // 是不是应该先创建两个对象 然后把他们分配到相应的位置？
-    // 也就是说我需要一个创建对象的函数，一个分配位置的函数
-
     // 合并时不生成新的对象，而是将其中一个对象的值改变
 
     // Yable: Initialize the gameBox array
@@ -43,6 +40,9 @@ function init() {
     while(board.firstChild) {
         board.removeChild(board.firstChild);
     }
+
+    // 移除事件监听器
+    // document.removeEventListener('keydown',slide);
 
     // 生成两个方块
     squareCreate();
@@ -125,9 +125,38 @@ function squareCreate() {
     console.log(square)
 }
 
+
+// 页面加载完成后自动开始游戏
+window.onload = function () {
+    gameStart();
+}
+
+
+// 程序主函数
+function gameStart() {
+    console.log('gameStart');
+
+    // 初始化棋盘
+    init();
+
+    document.addEventListener('keydown',handleKeydown);
+    // handleKeydown();    
+
+    // 向上划和向下划一类
+    // 向左划和向右划一类
+
+    // 如果按了重新开始按钮就进行初始化
+    restart.addEventListener('click',function () {
+        console.log('restart');
+        init();
+    })
+
+}
+
 // 游戏过程：方块的滑动：
 function slide(event) {
     console.log('slide');
+
     // 方块滑动的函数
     // 接收用户的输入并进行方块动作，分数计算，场景刷新，新方块生成
 
@@ -136,7 +165,6 @@ function slide(event) {
     // 向下划
     // 向左划
     // 向右划
-
     // 计算场景布局
 
 
@@ -150,6 +178,7 @@ function slide(event) {
     // 方块生成
     // 每滑动一次之后在空余 也就是值为0的区域里生成一个方块
     squareCreate();
+
 
     // 场景刷新
     // 给方块的滑动绑定对应的事件和动画 方块合并的动画
@@ -173,7 +202,8 @@ function slide(event) {
                 
         // 将整个游戏部分加上一层模糊 上面写 游戏结束
 
-        // 记录本次分数 上传到排行榜 待定 
+        // 判断滑动是否有有效：是否能造成方块合并
+        // 如果滑动无效则不算滑动
 
         // 游戏结束 重新开始 随便按一个键重新初始化
         /*document.addEventListener('keydown',function() {
@@ -182,7 +212,9 @@ function slide(event) {
         })*/
     }
 
-    return;
+    // return;
+    // }
+    
 }
 
 // 更新游戏面板
@@ -254,8 +286,8 @@ function ifGameOver() {
         }
         if (noRep) {
             gameOver = true;
-            console.log('Game Over!!!');
-            console.log(gameOver);
+            // console.log('Game Over!!!');
+            // console.log(gameOver);
             return;
         }
     }
@@ -559,67 +591,6 @@ function handleKeydown(event) {
             slide();
         }*/
     }
-}
-
-// 程序主函数
-function gameStart() {
-    console.log('gameStart');
-
-    // 初始化棋盘
-    init();
-
-    //Yable: Attach the keydown event listener
-    document.addEventListener('keydown', handleKeydown);
-
-    // 每次检测到一个滑动的操作都调用一次滑动的函数
-    /*document.addEventListener('keydown',function (event) {
-        let ifslide = true;
-        if (event.key === 'ArrowLeft') {
-            console.log('L');
-        }
-        else if (event.key === 'ArrowUp') {
-            console.log('U');
-        }
-        else if (event.key === 'ArrowDown') {
-            console.log('D');
-        }
-        else if (event.key === 'ArrowRight') {
-            console.log('R');
-        }
-        else {
-            ifslide = false;
-        }
-
-        if (ifslide) {
-            slide();
-        }
-    })
-
-    // 向上划和向下划一类
-    // 向左划和向右划一类
-*/
-    // 如果按了重新开始按钮就进行初始化
-    restart.addEventListener('click',function () {
-        console.log('restart');
-        init();
-    })
-/*
-    // 按Rremake
-    document.addEventListener('keydown',function (event) {
-        if (event.key === 'r' || event.key === 'R') {
-            console.log('restart');
-            init();
-        }
-    })
-
-
-    
-*/
-}
-
-// 页面加载完成后自动开始游戏
-window.onload = function () {
-    gameStart();
 }
 
 
