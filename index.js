@@ -50,6 +50,8 @@ function init() {
 
     // 得分重置为0
     score = 0;
+    document.getElementById("score_content").innerText = score
+
 
     // 游戏状态设置为未结束
     gameOver = false;
