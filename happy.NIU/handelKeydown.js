@@ -6,12 +6,12 @@ import slide from './slide.js';
 function handleKeydown(event) {
     // If the game is over and the 'r' key was pressed, restart the game
     if (index.shareGameOver.over) {
-        gameStart();
+        index.gameStart();
         console.log('restart');
     } 
     //Yable edit: move out the && (event.key === 'r' || event.key === 'R') part and make it independent
     if (event.key === 'r' || event.key === 'R') {
-        gameStart();
+        index.gameStart();
         console.log('restart');
     }
     else {

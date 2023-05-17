@@ -38,7 +38,7 @@ window.onload = function () {
 }
 
 // 程序主函数
-function gameStart() {
+export function gameStart() {
     console.log('gameStart');
 
     // 初始化棋盘
