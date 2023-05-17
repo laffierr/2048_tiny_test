@@ -68,9 +68,11 @@ function squareCreate() {
     board.appendChild(squareElement);
 
     // 随机生成一个值2或者4并给方块赋值
-    const squareValue = Math.random() < 0.8 ? 1 : 2;
+    //Yable edit: new way of generating value. Instead of using 2^1 or 2^2
+    //we directly assign 2 and 4 to squares
+    const squareValue = Math.random() < 0.8 ? 2 : 4;
 
-    squareElement.textContent = Math.pow(2,squareValue);
+    squareElement.textContent = squareValue;
 
     // 方块的值不同，颜色也不同
 
@@ -259,6 +261,239 @@ function ifGameOver() {
     }
 }
 
+//Yable: execute moving left. This involves both merge and move
+async function moveLeft() {
+    for (let row = 0; row < 4; row ++) {
+        for (let col = 0; col < 4; col++) {
+            const currentSquare = gameBox[row][col];
+            if (!currentSquare) continue;
+
+            let targetCol = col - 1;
+            while (targetCol >= 0 && !gameBox[row][targetCol]) {
+                targetCol--;
+            }
+            if (targetCol >= 0 && gameBox[row][targetCol].value === currentSquare.value) {
+                //merge squares
+                gameBox[row][targetCol].value = gameBox[row][targetCol].value + currentSquare.value; // Update the value
+                gameBox[row][targetCol].element.textContent = gameBox[row][targetCol].value; // Update the displayed value
+                // Remove the current square
+                currentSquare.element.remove(); // Removes the element from the DOM
+                gameBox[row][col] = null; // Removes the square from the gameBox
+                console.log("Merged to left!!!", gameBox)
+            } else {
+                //Move square
+                targetCol++ // Adjust the target column to be the first empty cell
+                if (targetCol !== col) {
+                    // Move the square to the target cell
+                gameBox[row][targetCol] = currentSquare;
+                gameBox[row][col] = null;  // Remove the square from the current cell
+                currentSquare.col = targetCol;  // Update the square's column
+                // Update the square's position in the DOM
+                currentSquare.element.style.left = 120 * currentSquare.col + "px";
+                console.log("Moved to left!!!",gameBox)
+                }
+            }
+        }
+    }
+}
+
+//Yable: detect whether a left movement is effective
+function isEffectiveMoveLeft() {
+    for (let row = 0; row < 4; row ++) {
+        for (let col = 0; col < 4; col++) {
+            const currentSquare = gameBox[row][col];
+            if (!currentSquare) continue;
+
+            let targetCol = col - 1;
+            while (targetCol >= 0 && !gameBox[row][targetCol]) {
+                targetCol--;
+            }
+            if (targetCol >= 0 && gameBox[row][targetCol].value === currentSquare.value) {
+                // squares would merge
+                return true;
+            } else {
+                targetCol++; // Adjust the target column to be the first empty cell
+                if (targetCol !== col) {
+                    // square would move
+                    return true;
+                }
+            }
+        }
+    }
+    return false; // no square would move or merge
+}
+
+//Yable: execute moving right
+async function moveRight() {
+    for (let row = 0; row < 4; row ++) {
+        for (let col = 3; col >= 0; col--) {
+            const currentSquare = gameBox[row][col];
+            if (!currentSquare) continue;
+
+            let targetCol = col + 1;
+            while (targetCol < 4 && !gameBox[row][targetCol]) {
+                targetCol++;
+            }
+            if (targetCol < 4 && gameBox[row][targetCol].value === currentSquare.value) {
+                //merge squares
+                gameBox[row][targetCol].value = gameBox[row][targetCol].value + currentSquare.value;
+                gameBox[row][targetCol].element.textContent = gameBox[row][targetCol].value;
+                currentSquare.element.remove();
+                gameBox[row][col] = null;
+                console.log("Merged to right!!!", gameBox)
+            } else {
+                //Move square
+                targetCol--;
+                if (targetCol !== col) {
+                    gameBox[row][targetCol] = currentSquare;
+                    gameBox[row][col] = null;
+                    currentSquare.col = targetCol;
+                    currentSquare.element.style.left = 120 * currentSquare.col + "px";
+                    console.log("Moved to right!!!", gameBox)
+                }
+            }
+        }
+    }
+}
+
+//Yable: detect if a right movement is effective
+function isEffectiveMoveRight() {
+    for (let row = 0; row < 4; row ++) {
+        for (let col = 3; col >= 0; col--) {
+            const currentSquare = gameBox[row][col];
+            if (!currentSquare) continue;
+
+            let targetCol = col + 1;
+            while (targetCol < 4 && !gameBox[row][targetCol]) {
+                targetCol++;
+            }
+            if (targetCol < 4 && gameBox[row][targetCol].value === currentSquare.value) {
+                return true;
+            } else {
+                targetCol--;
+                if (targetCol !== col) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+//Yable: execute moving up
+async function moveUp() {
+    for (let col = 0; col < 4; col++) {
+        for (let row = 0; row < 4; row ++) {
+            const currentSquare = gameBox[row][col];
+            if (!currentSquare) continue;
+
+            let targetRow = row - 1;
+            while (targetRow >= 0 && !gameBox[targetRow][col]) {
+                targetRow--;
+            }
+            if (targetRow >= 0 && gameBox[targetRow][col].value === currentSquare.value) {
+                //merge squares
+                gameBox[targetRow][col].value = gameBox[targetRow][col].value + currentSquare.value;
+                gameBox[targetRow][col].element.textContent = gameBox[targetRow][col].value;
+                currentSquare.element.remove();
+                gameBox[row][col] = null;
+                console.log("Merged upwards!!!", gameBox)
+            } else {
+                //Move square
+                targetRow++;
+                if (targetRow !== row) {
+                    gameBox[targetRow][col] = currentSquare;
+                    gameBox[row][col] = null;
+                    currentSquare.row = targetRow;
+                    currentSquare.element.style.top = 120 * currentSquare.row + "px";
+                    console.log("Moved upwards!!!", gameBox)
+                }
+            }
+        }
+    }
+}
+
+//Yable: detect whether a up movement is effective
+function isEffectiveMoveUp() {
+    for (let col = 0; col < 4; col++) {
+        for (let row = 0; row < 4; row ++) {
+            const currentSquare = gameBox[row][col];
+            if (!currentSquare) continue;
+
+            let targetRow = row - 1;
+            while (targetRow >= 0 && !gameBox[targetRow][col]) {
+                targetRow--;
+            }
+            if (targetRow >= 0 && gameBox[targetRow][col].value === currentSquare.value) {
+                return true;
+            } else {
+                targetRow++;
+                if (targetRow !== row) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+//Yable: execute moving down
+async function moveDown() {
+    for (let col = 0; col < 4; col++) {
+        for (let row = 3; row >= 0; row--) {
+            const currentSquare = gameBox[row][col];
+            if (!currentSquare) continue;
+
+            let targetRow = row + 1;
+            while (targetRow < 4 && !gameBox[targetRow][col]) {
+                targetRow++;
+            }
+            if (targetRow < 4 && gameBox[targetRow][col].value === currentSquare.value) {
+                //merge squares
+                gameBox[targetRow][col].value = gameBox[targetRow][col].value + currentSquare.value;
+                gameBox[targetRow][col].element.textContent = gameBox[targetRow][col].value;
+                currentSquare.element.remove();
+                gameBox[row][col] = null;
+                console.log("Merged downwards!!!", gameBox)
+            } else {
+                //Move square
+                targetRow--;
+                if (targetRow !== row) {
+                    gameBox[targetRow][col] = currentSquare;
+                    gameBox[row][col] = null;
+                    currentSquare.row = targetRow;
+                    currentSquare.element.style.top = 120 * currentSquare.row + "px";
+                    console.log("Moved downwards!!!", gameBox)
+                }
+            }
+        }
+    }
+}
+
+//Yable: detect whether a down movement is effective
+function isEffectiveMoveDown() {
+    for (let col = 0; col < 4; col++) {
+        for (let row = 3; row >= 0; row--) {
+            const currentSquare = gameBox[row][col];
+            if (!currentSquare) continue;
+
+            let targetRow = row + 1;
+            while (targetRow < 4 && !gameBox[targetRow][col]) {
+                targetRow++;
+            }
+            if (targetRow < 4 && gameBox[targetRow][col].value === currentSquare.value) {
+                return true;
+            } else {
+                targetRow--;
+                if (targetRow !== row) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 //Yable: Create a function handling keydown
 function handleKeydown(event) {
     // If the game is over and the 'r' key was pressed, restart the game
@@ -273,26 +508,56 @@ function handleKeydown(event) {
     }
     else {
         // Handle other key presses
-        let ifslide = true;
+        //Yable: Now maybe there is no need to have a ifslide boolean value
+        //since we will detect whether the move is effective every time an event happens.
+        
+        //yable edit:
+        //let ifslide = true;
         if (event.key === 'ArrowLeft') {
             console.log('L');
+            //Yable: Detect if the move is an effective move
+            if (isEffectiveMoveLeft()) {
+                moveLeft();
+                console.log('Move Left executed')
+                slide();
+            }
         }
         else if (event.key === 'ArrowUp') {
             console.log('U');
+            //Yable: Detect if the move is an effective move
+            if (isEffectiveMoveUp()) {
+                moveUp();
+                console.log('Move Up executed')
+                slide();
+            }
         }
         else if (event.key === 'ArrowDown') {
             console.log('D');
+            //Yable: Detect if the move is an effective move
+            if (isEffectiveMoveDown()) {
+                moveDown();
+                console.log('Move Down executed')
+                slide();
+            }
         }
         else if (event.key === 'ArrowRight') {
             console.log('R');
-        }
-        else {
-            ifslide = false;
+            //Yable: Detect if the move is an effective move
+            if (isEffectiveMoveRight()) {
+                moveRight();
+                console.log('Move Right executed')
+                slide();
+            }
         }
 
-        if (ifslide) {
+        //Yable edit:
+        /*else {
+            ifslide = false;
+        }*/
+
+        /*if (ifslide) {
             slide();
-        }
+        }*/
     }
 }
 
