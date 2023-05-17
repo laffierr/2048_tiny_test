@@ -288,6 +288,7 @@ function ifGameOver() {
             gameOver = true;
             // console.log('Game Over!!!');
             // console.log(gameOver);
+            window.alert('Game Over!!! Your final score is ' + score + '. Press any OK to continue.');
             return;
         }
     }
@@ -308,6 +309,8 @@ async function moveLeft() {
                 //merge squares
                 gameBox[row][targetCol].value = gameBox[row][targetCol].value + currentSquare.value; // Update the value
                 gameBox[row][targetCol].element.textContent = gameBox[row][targetCol].value; // Update the displayed value
+                score += gameBox[row][targetCol].value; // Add the value to the score
+                document.getElementById("score_content").innerText = score;
                 // Remove the current square
                 currentSquare.element.remove(); // Removes the element from the DOM
                 gameBox[row][col] = null; // Removes the square from the gameBox
@@ -370,6 +373,8 @@ async function moveRight() {
                 //merge squares
                 gameBox[row][targetCol].value = gameBox[row][targetCol].value + currentSquare.value;
                 gameBox[row][targetCol].element.textContent = gameBox[row][targetCol].value;
+                score += gameBox[row][targetCol].value; // Add the value to the score
+                document.getElementById("score_content").innerText = score;
                 currentSquare.element.remove();
                 gameBox[row][col] = null;
                 console.log("Merged to right!!!", gameBox)
@@ -427,6 +432,8 @@ async function moveUp() {
                 //merge squares
                 gameBox[targetRow][col].value = gameBox[targetRow][col].value + currentSquare.value;
                 gameBox[targetRow][col].element.textContent = gameBox[targetRow][col].value;
+                score += gameBox[targetRow][col].value; // Add the value to the score
+                document.getElementById("score_content").innerText = score;
                 currentSquare.element.remove();
                 gameBox[row][col] = null;
                 console.log("Merged upwards!!!", gameBox)
@@ -484,6 +491,8 @@ async function moveDown() {
                 //merge squares
                 gameBox[targetRow][col].value = gameBox[targetRow][col].value + currentSquare.value;
                 gameBox[targetRow][col].element.textContent = gameBox[targetRow][col].value;
+                score += gameBox[targetRow][col].value; // Add the value to the score
+                document.getElementById("score_content").innerText = score;
                 currentSquare.element.remove();
                 gameBox[row][col] = null;
                 console.log("Merged downwards!!!", gameBox)
