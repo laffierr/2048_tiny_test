@@ -71,6 +71,10 @@ function squareCreate() {
     console.log(index.gameBox);
     // console.log(row,col);
     console.log(square)
+
+    //Yable: add create animation
+    // Add the "create" class to apply the animation
+    squareElement.classList.add('create');
 }
 
 // 导出
