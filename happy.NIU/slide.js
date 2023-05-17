@@ -126,7 +126,7 @@ function ifGameOver() {
             index.shareGameOver.over = true;
             // console.log('Game Over!!!');
             // console.log(shareGameOver.over);
-            window.alert('Game Over!!! Your final score is ' + index.shareScore.score + '. Press any OK to continue.');
+            window.alert('Game Over!!! Your final score is ' + index.shareScore.score + '. Press OK to continue.');
             return;
         }
     }
