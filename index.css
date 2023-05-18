@@ -153,7 +153,29 @@ body {
     height: 18vw;
     width: 18vw;
     /* box-shadow: 0 2px 4px rgba(0,0,0,0.4); */
+
+    transition: all 0.05s ease-out; /* transition on all property changes */
 }
+
+.squareElement.merged {
+    animation: merge 0.05s ease-out;
+}
+
+@keyframes merge {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+@keyframes create {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+.squareElement.create {
+    animation: create 0.05s ease-out;
+}
+
 
 @media screen and (min-width: 300px) {
     #title_container {
@@ -270,7 +292,29 @@ body {
         height: 50px;
         width: 50px;
         /* box-shadow: 0 2px 4px rgba(0,0,0,0.4); */
+
+        transition: all 0.05s ease-out; /* transition on all property changes */
     }
+
+    .squareElement.merged {
+        animation: merge 0.05s ease-out;
+    }
+    
+    @keyframes merge {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.3); }
+        100% { transform: scale(1); } 
+    }
+
+    @keyframes create {
+        0% { transform: scale(0); }
+        100% { transform: scale(1); }
+    }
+    
+    .squareElement.create {
+        animation: create 0.05s ease-out;
+    }
+
 }
 
 @media screen and (min-width: 500px) {
@@ -388,6 +432,27 @@ body {
         height: 60px;
         width: 60px;
         /* box-shadow: 0 2px 4px rgba(0,0,0,0.4); */
+
+        transition: all 0.05s ease-out; /* transition on all property changes */
+    }
+
+    .squareElement.merged {
+        animation: merge 0.05s ease-out;
+    }
+    
+    @keyframes merge {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.3); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes create {
+        0% { transform: scale(0); }
+        100% { transform: scale(1); }
+    }
+    
+    .squareElement.create {
+        animation: create 0.05s ease-out;
     }
 }
 @media screen and (min-width: 750px) {
@@ -505,6 +570,27 @@ body {
         height: 100px;
         width: 100px;
         /* box-shadow: 0 2px 4px rgba(0,0,0,0.4); */
+
+        transition: all 0.05s ease-out; /* transition on all property changes */
+    }
+
+    .squareElement.merged {
+        animation: merge 0.05s ease-out;
+    }
+    
+    @keyframes merge {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.3); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes create {
+        0% { transform: scale(0); }
+        100% { transform: scale(1); }
+    }
+    
+    .squareElement.create {
+        animation: create 0.05s ease-out;
     }
 
 }
