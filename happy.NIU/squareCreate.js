@@ -72,9 +72,14 @@ function squareCreate() {
     // console.log(row,col);
     console.log(square)
 
-    //Yable: add create animation
+    //Yable: add a create animation
     // Add the "create" class to apply the animation
     squareElement.classList.add('create');
+    // Remove the 'create' class after the animation completes
+    squareElement.addEventListener('animationend', function() {
+        this.classList.remove('create');
+    }, {once: true});
+    console.log('square creating animation complete')
 }
 
 // 导出
