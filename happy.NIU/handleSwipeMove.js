@@ -12,7 +12,7 @@ let touchStartX;
 let touchStartY;
 let touchEndX;
 let touchEndY;
-const swipeThreshold = 30; // Threshold for swiping movements. Adjust this value as needed
+const swipeThreshold = 50; // Threshold for swiping movements. Adjust this value as needed
 
 function handleSwipeMove(event) {
     if (event.type === 'touchstart') {
