@@ -2,6 +2,14 @@ import * as index from '../index.js'
 // import { gameBox,shareScore } from './index.js';
 import slide from './slide.js';
 
+let gameBoardElement = document.getElementById('body_content')
+// Calculate the boundaries of the game board
+let gameBoardRect = gameBoardElement.getBoundingClientRect();
+let gameBoardStartX = gameBoardRect.left;
+let gameBoardEndX = gameBoardRect.right;
+let gameBoardStartY = gameBoardRect.top;
+let gameBoardEndY = gameBoardRect.bottom;
+
 function delay(time) {
     return new Promise(function(resolve) {
         setTimeout(resolve, time)
@@ -15,12 +23,26 @@ let touchEndY;
 const swipeThreshold = 50; // Threshold for swiping movements. Adjust this value as needed
 
 function handleSwipeMove(event) {
+    let touchX, touchY;
+    if (event.type === 'touchstart' || event.type === 'touchmove') {
+        touchX = event.touches[0].clientX;
+        touchY = event.touches[0].clientY;
+    } else if (event.type === 'touchend') {
+        touchX = event.changedTouches[0].clientX;
+        touchY = event.changedTouches[0].clientY;
+    }
+
+    // Check if the touch event occurred within the game board
+    if (touchX < gameBoardStartX || touchX > gameBoardEndX || touchY < gameBoardStartY || touchY > gameBoardEndY) {
+        return; // Ignore swipe movements outside the game board
+    }
+
     if (event.type === 'touchstart') {
-        touchStartX = event.touches[0].clientX;
-        touchStartY = event.touches[0].clientY;
+        touchStartX = touchX;
+        touchStartY = touchY;
     } else if (event.type === 'touchmove') {
-        touchEndX = event.changedTouches[0].clientX;
-        touchEndY = event.changedTouches[0].clientY;
+        touchEndX = touchX;
+        touchEndY = touchY;
     } else if (event.type === 'touchend') {
         const deltaX = touchEndX - touchStartX;
         const deltaY = touchEndY - touchStartY;
@@ -33,54 +55,37 @@ function handleSwipeMove(event) {
 
         if (absDeltaX > absDeltaY) {
             // Horizontal swipe
-            if (deltaX > 0) {
-                // Swipe to the right
-                //Yable: Detect if the move is an effective move
-                if (isEffectiveMoveRight()) {
+            if (deltaX > 0 && isEffectiveMoveRight()) {
                 moveRight();
-                console.log('Move Right executed')
+                console.log('Move Right executed');
                 delay(300).then(function() {
                     slide();
-                    console.log('slide complete')
-                    });
-            }
-            } else {
-                // Swipe to the left
-                //Yable: Detect if the move is an effective move
-                if (isEffectiveMoveLeft()) {
+                    console.log('slide complete');
+                });
+            } else if (deltaX < 0 && isEffectiveMoveLeft()) {
                 moveLeft();
-                console.log('Move Left executed')
-                // delay the slide until the animation is complete
+                console.log('Move Left executed');
                 delay(300).then(function() {
                     slide();
-                    console.log('slide complete')
-                    });
-            }
+                    console.log('slide complete');
+                });
             }
         } else {
             // Vertical swipe
-            if (deltaY > 0) {
-                // Swipe down
-                //Yable: Detect if the move is an effective move
-                if (isEffectiveMoveDown()) {
-                moveDown()
-                console.log('Move Down executed')
+            if (deltaY > 0 && isEffectiveMoveDown()) {
+                moveDown();
+                console.log('Move Down executed');
                 delay(300).then(function() {
                     slide();
-                    console.log('slide complete')
-                    });
-            }
-            } else {
-                // Swipe up
-                //Yable: Detect if the move is an effective move
-                if (isEffectiveMoveUp()) {
+                    console.log('slide complete');
+                });
+            } else if (deltaY < 0 && isEffectiveMoveUp()) {
                 moveUp();
-                console.log('Move Up executed')
+                console.log('Move Up executed');
                 delay(300).then(function() {
                     slide();
-                    console.log('slide complete')
-                    });
-            }
+                    console.log('slide complete');
+                });
             }
         }
     }

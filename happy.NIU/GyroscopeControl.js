@@ -22,11 +22,8 @@ export function requestOrientationPermission() {
   }
 }
 
-let previousGammaSpeed = 0;
-let previousBetaSpeed = 0;
 let previousGamma = 0;
 let previousBeta = 0;
-let previousTime = Date.now();
 let coolDown = false;  // Variable to hold the cool-down state
 
 export function handleOrientation(event) {
@@ -34,80 +31,69 @@ export function handleOrientation(event) {
 
     var currentGamma = event.gamma;
     var currentBeta = event.beta;
-    var currentTime = Date.now();
 
     var deltaGamma = currentGamma - previousGamma;
     var deltaBeta = currentBeta - previousBeta;
-    var deltaTime = currentTime - previousTime; // in ms
 
-    var gammaSpeed = deltaGamma / deltaTime * 1000; // in degrees per second
-    var betaSpeed = deltaBeta / deltaTime * 1000; // in degrees per second
+    var threshold = 15; // adjust as needed
 
-    var gammaAccel = (gammaSpeed - previousGammaSpeed) / deltaTime * 1000; // in degrees per second^2
-    var betaAccel = (betaSpeed - previousBetaSpeed) / deltaTime * 1000; // in degrees per second^2
-
-    var threshold = 15000; // adjust as needed
-
-    if (gammaAccel > threshold) {
+    if (deltaGamma > threshold) {
         if (isEffectiveMoveRight()) {
             moveRight();
-            console.log('Move Right executed')
+            console.log('Move Right executed');
             delay(300).then(function() {
                 slide();
                 console.log('slide complete');
-            });
-            coolDown = true;  // Set the cool-down state
-            delay(800).then(function() {  // Wait 500ms (or another suitable duration) before clearing the cool-down state
-                coolDown = false;
+                coolDown = true;  // Set the cool-down state
+                delay(800).then(function() {  // Wait 500ms (or another suitable duration) before clearing the cool-down state
+                    coolDown = false;
+                });
             });
         }
-    } else if (gammaAccel < -threshold) {
+    } else if (deltaGamma < -threshold) {
         if (isEffectiveMoveLeft()) {
             moveLeft();
-            console.log('Move Left executed')
+            console.log('Move Left executed');
             delay(300).then(function() {
                 slide();
                 console.log('slide complete');
-            });
-            coolDown = true;
-            delay(800).then(function() {
-                coolDown = false;
+                coolDown = true;
+                delay(800).then(function() {
+                    coolDown = false;
+                });
             });
         }
-    } else if (betaAccel > threshold) {
+    } else if (deltaBeta > threshold) {
         if (isEffectiveMoveDown()) {
-            moveDown()
-            console.log('Move Down executed')
+            moveDown();
+            console.log('Move Down executed');
             delay(300).then(function() {
                 slide();
                 console.log('slide complete');
-            });
-            coolDown = true;
-            delay(800).then(function() {
-                coolDown = false;
+                coolDown = true;
+                delay(800).then(function() {
+                    coolDown = false;
+                });
             });
         }
-    } else if (betaAccel < -threshold) {
+    } else if (deltaBeta < -threshold) {
         if (isEffectiveMoveUp()) {
             moveUp();
-            console.log('Move Up executed')
+            console.log('Move Up executed');
             delay(300).then(function() {
                 slide();
                 console.log('slide complete');
-            });
-            coolDown = true;
-            delay(800).then(function() {
-                coolDown = false;
+                coolDown = true;
+                delay(800).then(function() {
+                    coolDown = false;
+                });
             });
         }
     }
 
-    // save the current orientation and time for the next event
-    previousGammaSpeed = gammaSpeed;
-    previousBetaSpeed = betaSpeed;
+    // save the current orientation for the next event
     previousGamma = currentGamma;
     previousBeta = currentBeta;
-    previousTime = currentTime;
 }
 
 function delay(time) {
