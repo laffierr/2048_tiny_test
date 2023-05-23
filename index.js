@@ -6,8 +6,7 @@ import handleKeydown from './happy.NIU/handelKeydown.js';
 //Yable: import handleSwipeMove 
 import handleSwipeMove from './happy.NIU/handleSwipeMove.js'
 //Yable: import GyroscopeControl
-import handleOrientation from './happy.NIU/GyroscopeControl.js'
-import requestOrientationPermission from './happy.NIU/GyroscopeControl.js'
+import { handleOrientation, requestOrientationPermission } from './happy.NIU/GyroscopeControl.js';
 // 创建一个4*4的二维数组作为棋盘
 // 里面的每一个值都是二的n次幂，其中n>=1，而且可以等于零
 export const gameBox = []
