@@ -22,82 +22,92 @@ export function requestOrientationPermission() {
   }
 }
 
-let lastGamma = 0;
-let lastBeta = 0;
-let lastGammaVelocity = 0;
-let lastBetaVelocity = 0;
-let lastGammaAcceleration = 0;
-let lastBetaAcceleration = 0;
+let previousGammaSpeed = 0;
+let previousBetaSpeed = 0;
+let previousGamma = 0;
+let previousBeta = 0;
+let previousTime = Date.now();
+let coolDown = false;  // Variable to hold the cool-down state
 
 export function handleOrientation(event) {
-    var beta = event.beta;
-    var gamma = event.gamma;
+    if (coolDown) return;  // If in cool-down period, ignore the event
 
-    // Calculate velocities
-    let gammaVelocity = gamma - lastGamma;
-    let betaVelocity = beta - lastBeta;
+    var currentGamma = event.gamma;
+    var currentBeta = event.beta;
+    var currentTime = Date.now();
 
-    // Calculate accelerations
-    let gammaAcceleration = gammaVelocity - lastGammaVelocity;
-    let betaAcceleration = betaVelocity - lastBetaVelocity;
+    var deltaGamma = currentGamma - previousGamma;
+    var deltaBeta = currentBeta - previousBeta;
+    var deltaTime = currentTime - previousTime; // in ms
 
-    // Set some threshold for recognizing the action
-    var threshold = 25;
+    var gammaSpeed = deltaGamma / deltaTime * 1000; // in degrees per second
+    var betaSpeed = deltaBeta / deltaTime * 1000; // in degrees per second
 
-    // Map the device orientation to game controls
-    if (Math.abs(gammaAcceleration) > threshold) {
-        if (gammaAcceleration > 0) {
-            // move right
-            if (isEffectiveMoveRight()) {
-                moveRight();
-                console.log('Move Right executed');
-                delay(300).then(function() {
-                    slide();
-                    console.log('slide complete');
-                });
-            } 
-        } else {
-            // move left
-            if (isEffectiveMoveLeft()) {
-                moveLeft();
-                console.log('Move Left executed');
-                delay(300).then(function() {
-                    slide();
-                    console.log('slide complete');
-                });
-            }
+    var gammaAccel = (gammaSpeed - previousGammaSpeed) / deltaTime * 1000; // in degrees per second^2
+    var betaAccel = (betaSpeed - previousBetaSpeed) / deltaTime * 1000; // in degrees per second^2
+
+    var threshold = 15000; // adjust as needed
+
+    if (gammaAccel > threshold) {
+        if (isEffectiveMoveRight()) {
+            moveRight();
+            console.log('Move Right executed')
+            delay(300).then(function() {
+                slide();
+                console.log('slide complete');
+            });
+            coolDown = true;  // Set the cool-down state
+            delay(800).then(function() {  // Wait 500ms (or another suitable duration) before clearing the cool-down state
+                coolDown = false;
+            });
         }
-    } 
-
-    if (Math.abs(betaAcceleration) > threshold) {
-        if (betaAcceleration > 0) {
-            // move down
-            if (isEffectiveMoveDown()) {
-                moveDown();
-                console.log('Move Down executed');
-                delay(300).then(function() {
-                    slide();
-                    console.log('slide complete');
-                });
-            }
-        } else {
-            // move up
-            if (isEffectiveMoveUp()) {
-                moveUp();
-                console.log('Move Up executed');
-                delay(300).then(function() {
-                    slide();
-                    console.log('slide complete');
-                });
-            }
+    } else if (gammaAccel < -threshold) {
+        if (isEffectiveMoveLeft()) {
+            moveLeft();
+            console.log('Move Left executed')
+            delay(300).then(function() {
+                slide();
+                console.log('slide complete');
+            });
+            coolDown = true;
+            delay(800).then(function() {
+                coolDown = false;
+            });
+        }
+    } else if (betaAccel > threshold) {
+        if (isEffectiveMoveDown()) {
+            moveDown()
+            console.log('Move Down executed')
+            delay(300).then(function() {
+                slide();
+                console.log('slide complete');
+            });
+            coolDown = true;
+            delay(800).then(function() {
+                coolDown = false;
+            });
+        }
+    } else if (betaAccel < -threshold) {
+        if (isEffectiveMoveUp()) {
+            moveUp();
+            console.log('Move Up executed')
+            delay(300).then(function() {
+                slide();
+                console.log('slide complete');
+            });
+            coolDown = true;
+            delay(800).then(function() {
+                coolDown = false;
+            });
         }
     }
 
-    // Save the current orientation and velocity for the next event
-    lastGamma = gamma;
-    lastBeta = beta;
-    lastGammaVelocity = gammaVelocity;
-    lastBetaVelocity = betaVelocity;
+    // save the current orientation and time for the next event
+    previousGammaSpeed = gammaSpeed;
+    previousBetaSpeed = betaSpeed;
+    previousGamma = currentGamma;
+    previousBeta = currentBeta;
+    previousTime = currentTime;
 }
 
 function delay(time) {
