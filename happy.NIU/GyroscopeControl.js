@@ -18,7 +18,7 @@ export function requestOrientationPermission() {
 }
 
 
-export default function handleOrientation(event) {
+export function handleOrientation(event) {
     var beta = event.beta;
     var gamma = event.gamma;
 
