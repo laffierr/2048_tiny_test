@@ -5,6 +5,8 @@ import slide from './happy.NIU/slide.js';
 import handleKeydown from './happy.NIU/handelKeydown.js';
 //Yable: import handleSwipeMove 
 import handleSwipeMove from './happy.NIU/handleSwipeMove.js'
+//Yable: import GyroscopeControl
+import handleOrientation from './happy.NIU/handleOrientation.js'
 
 // 创建一个4*4的二维数组作为棋盘
 // 里面的每一个值都是二的n次幂，其中n>=1，而且可以等于零
@@ -49,6 +51,14 @@ export function gameStart() {
     document.addEventListener('touchstart', handleSwipeMove, false);
     document.addEventListener('touchmove', handleSwipeMove, false);
     document.addEventListener('touchend', handleSwipeMove, false);
+    //Yable: add a gyroscope listener
+    if (window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', handleOrientation, false);
+    } else {
+        // Device Orientation isn't supported
+        console.log("Device Orientation is not supported.")
+    }
+ 
 
     // 如果按了重新开始按钮就进行初始化
     restart.addEventListener('click',function () {
