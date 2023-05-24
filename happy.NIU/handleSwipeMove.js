@@ -1,5 +1,4 @@
 import * as index from '../index.js'
-// import { gameBox,shareScore } from './index.js';
 import slide from './slide.js';
 
 function delay(time) {
@@ -39,7 +38,7 @@ function handleSwipeMove(event) {
                 if (isEffectiveMoveRight()) {
                 moveRight();
                 console.log('Move Right executed')
-                delay(300).then(function() {
+                delay(200).then(function() {
                     slide();
                     console.log('slide complete')
                     });
@@ -51,7 +50,7 @@ function handleSwipeMove(event) {
                 moveLeft();
                 console.log('Move Left executed')
                 // delay the slide until the animation is complete
-                delay(300).then(function() {
+                delay(200).then(function() {
                     slide();
                     console.log('slide complete')
                     });
@@ -65,7 +64,7 @@ function handleSwipeMove(event) {
                 if (isEffectiveMoveDown()) {
                 moveDown()
                 console.log('Move Down executed')
-                delay(300).then(function() {
+                delay(200).then(function() {
                     slide();
                     console.log('slide complete')
                     });
@@ -76,7 +75,7 @@ function handleSwipeMove(event) {
                 if (isEffectiveMoveUp()) {
                 moveUp();
                 console.log('Move Up executed')
-                delay(300).then(function() {
+                delay(200).then(function() {
                     slide();
                     console.log('slide complete')
                     });

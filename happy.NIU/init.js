@@ -1,13 +1,15 @@
 // 导入
 import * as index from '../index.js'
 import squareCreate from './squareCreate.js';
+import { highScore } from './highScore.js';
 
 
 function init() {
     // 初始化函数
     // 将数组归零
 
-    // 合并时不生成新的对象，而是将其中一个对象的值改变
+    // 设置最高分
+    index.highScoreText.innerHTML = highScore;
 
     // Yable: Initialize the gameBox array
     index.gameBox.length = 0; // This will clear the array
@@ -25,9 +27,6 @@ function init() {
     while(board.firstChild) {
         board.removeChild(board.firstChild);
     }
-
-    // 移除事件监听器
-    // document.removeEventListener('keydown',slide);
 
     // 生成两个方块
     squareCreate();
