@@ -41,7 +41,7 @@ export function handleOrientation(event) {
     var gammaSpeed = deltaGamma / deltaTime * 1000; // in degrees per second
     var betaSpeed = deltaBeta / deltaTime * 1000; // in degrees per second
 
-    var speedThreshold = 350; // adjust as needed
+    var speedThreshold = 200; // adjust as needed
     // According to our impirical experience, moving down is usually harder
 
     if (Math.abs(gammaSpeed) > Math.abs(betaSpeed)) {
@@ -54,7 +54,7 @@ export function handleOrientation(event) {
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(600).then(function() {  // Wait 500ms (or another suitable duration) before clearing the cool-down state
+                    delay(100).then(function() {  // Wait 500ms (or another suitable duration) before clearing the cool-down state
                         coolDown = false;
                     });
                 });
@@ -67,7 +67,7 @@ export function handleOrientation(event) {
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(600).then(function() {
+                    delay(100).then(function() {
                         coolDown = false;
                     });
                 });
@@ -83,7 +83,7 @@ export function handleOrientation(event) {
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(600).then(function() {
+                    delay(100).then(function() {
                         coolDown = false;
                     });
                 });
@@ -96,7 +96,7 @@ export function handleOrientation(event) {
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(600).then(function() {
+                    delay(100).then(function() {
                         coolDown = false;
                     });
                 });
