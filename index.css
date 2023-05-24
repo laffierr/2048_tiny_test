@@ -57,12 +57,14 @@ body {
     font-size: 3.6vw;
     /* font-size: 20px; */
     background-color: #7a5f41c7;
+    margin-right: 3.6vw;  /* Add a 20 pixel gap to the right */
+
 }
 
 #high_score {
     height: 9.9vw;
     width: 24.3vw;
-    
+        
     /* text-align: center; */
     display: flex;
     justify-content: center;
@@ -70,7 +72,24 @@ body {
     
     font-weight: bold;
     font-size: 3.6vw;
+    margin-right: 3.6vw;  /* Add a 20 pixel gap to the right */
+
 }
+#gyro-toggle{
+    height: 9.9vw;
+    width: 24.3vw;
+    border-radius: 1.44vw;
+    border-style: none;
+    outline: none;
+
+    color: white;
+    font-weight: bold;
+    font-size: 3.6vw;
+    background-color: #7a5f41c7;
+    margin-right: 3.6vw;  /* Add a 20 pixel gap to the right */
+
+}
+
 
 #score_container {
     display: flex;
@@ -225,12 +244,13 @@ body {
         font-weight: bold;
         font-size: 10px;
         background-color: #7a5f41c7;
+        margin-right: 10px;  /* Add a 20 pixel gap to the right */
     }
 
     #high_score {
         height: 27.5px;
         width: 67.5px;
-        
+         
         /* text-align: center; */
         display: flex;
         justify-content: center;
@@ -238,6 +258,21 @@ body {
         
         font-weight: bold;
         font-size: 10px;
+        margin-right: 10px;  /* Add a 20 pixel gap to the right */
+    }
+    
+    #gyro-toggle{
+        height: 27.5px;
+        width: 67.5px;
+        border-radius: 4px;
+        border-style: none;
+        outline: none;
+    
+        color: white;
+        font-weight: bold;
+        font-size: 10px;
+        background-color: #7a5f41c7;
+        margin-right: 10px;  /* Add a 20 pixel gap to the right */
     }
     
     #score_container {
@@ -377,6 +412,7 @@ body {
         font-weight: bold;
         font-size: 12px;
         background-color: #7a5f41c7;
+        margin-right: 12px;  /* Add a 20 pixel gap to the right */
     }
 
     #high_score {
@@ -390,6 +426,22 @@ body {
         
         font-weight: bold;
         font-size: 12px;
+        margin-right: 12px;  /* Add a 20 pixel gap to the right */
+    }
+
+    #gyro-toggle{
+        height: 33px;
+        width: 81px;
+        border-radius: 4.8px;
+        border-style: none;
+        outline: none;
+    
+        color: white;
+        font-weight: bold;
+        font-size: 12px;
+        background-color: #7a5f41c7;
+        margin-right: 12px;  /* Add a 20 pixel gap to the right */
+
     }
     
     #score_container {
@@ -526,13 +578,15 @@ body {
         color: white;
         font-weight: bold;
         font-size: 20px;
-        background-color: #7a5f41c7;   
+        background-color: #7a5f41c7;
+        margin-right: 20px;  /* Add a 20 pixel gap to the right */
     }
 
     #high_score {
         height: 55px;
         width: 135px;
-        
+        background-color: #7a5f41c7;
+                
         /* text-align: center; */
         display: flex;
         justify-content: center;
@@ -540,6 +594,21 @@ body {
         
         font-weight: bold;
         font-size: 20px;
+        margin-right: 20px;  /* Add a 20 pixel gap to the right */
+    }
+
+    #gyro-toggle{
+        height: 55px;
+        width: 135px;
+        border-radius: 8px;
+        border-style: none;
+        outline: none;
+    
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        background-color: #7a5f41c7;
+        margin-right: 20px;  /* Add a 20 pixel gap to the right */
     }
     
     #score_container {
