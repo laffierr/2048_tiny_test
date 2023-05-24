@@ -22,9 +22,9 @@ export const restart = document.getElementById('btn_content');
 export const board = document.getElementById('square_container');
 
 //gyroscope status
-var isGyroscopeEnabled = false;
-var gyroToggle = document.getElementById("gyro-toggle");
-var gyroStatus = document.getElementById("gyro-status");
+export var isGyroscopeEnabled = false;
+export var gyroToggle = document.getElementById("gyro-toggle");
+export var gyroStatus = document.getElementById("gyro-status");
 
 // 创建方块对象
 // 对象名：square
