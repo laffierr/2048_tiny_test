@@ -42,7 +42,7 @@ export function handleOrientation(event) {
     var gammaSpeed = deltaGamma / deltaTime * 1000; // in degrees per second
     var betaSpeed = deltaBeta / deltaTime * 1000; // in degrees per second
 
-    var speedThreshold = 150; // adjust as needed
+    var speedThreshold = 200; // adjust as needed
     // According to our impirical experience, moving down is usually harder
 
     if (Math.abs(gammaSpeed) > Math.abs(betaSpeed)) {
