@@ -1,6 +1,7 @@
 import * as index from '../index.js'
 // import { gameBox,shareScore } from './index.js';
 import slide from './slide.js';
+import vibrate from './vibrate.js'
 
 //Ask browser for gyroscope permission
 export function requestOrientationPermission() {
@@ -50,11 +51,12 @@ export function handleOrientation(event) {
             if (isEffectiveMoveRight()) {
                 moveRight();
                 console.log('Move Right executed');
+                vibrate()
                 coolDown = true;  // Set the cool-down state
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(100).then(function() {  // Wait 500ms (or another suitable duration) before clearing the cool-down state
+                    delay(150).then(function() {  // Wait 500ms (or another suitable duration) before clearing the cool-down state
                         coolDown = false;
                     });
                 });
@@ -63,11 +65,12 @@ export function handleOrientation(event) {
             if (isEffectiveMoveLeft()) {
                 moveLeft();
                 console.log('Move Left executed');
+                vibrate()
                 coolDown = true;  // Set the cool-down state
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(100).then(function() {
+                    delay(150).then(function() {
                         coolDown = false;
                     });
                 });
@@ -79,11 +82,12 @@ export function handleOrientation(event) {
             if (isEffectiveMoveDown()) {
                 moveDown();
                 console.log('Move Down executed');
+                vibrate()
                 coolDown = true;  // Set the cool-down state
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(100).then(function() {
+                    delay(150).then(function() {
                         coolDown = false;
                     });
                 });
@@ -92,11 +96,12 @@ export function handleOrientation(event) {
             if (isEffectiveMoveUp()) {
                 moveUp();
                 console.log('Move Up executed');
+                vibrate()
                 coolDown = true;  // Set the cool-down state
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(100).then(function() {
+                    delay(150).then(function() {
                         coolDown = false;
                     });
                 });
