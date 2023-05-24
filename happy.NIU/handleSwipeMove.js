@@ -1,10 +1,8 @@
 import * as index from '../index.js'
-// import { gameBox,shareScore } from './index.js';
 import slide from './slide.js';
 import vibrate from './vibrate.js'
 
 let gameBoardElement = document.getElementById('body_content')
-// Calculate the boundaries of the game board
 let gameBoardRect = gameBoardElement.getBoundingClientRect();
 let gameBoardStartX = gameBoardRect.left;
 let gameBoardEndX = gameBoardRect.right;
@@ -21,7 +19,8 @@ let touchStartX;
 let touchStartY;
 let touchEndX;
 let touchEndY;
-const swipeThreshold = 30; // Threshold for swiping movements. Adjust this value as needed
+let hasMoved = false;  // Add a new variable here
+const swipeThreshold = 30;
 
 function handleSwipeMove(event) {
     let touchX, touchY;
@@ -33,29 +32,33 @@ function handleSwipeMove(event) {
         touchY = event.changedTouches[0].clientY;
     }
 
-    // Check if the touch event occurred within the game board
     if (touchY < gameBoardStartY) {
-        return; // Ignore swipe movements outside the game board
+        return;
     }
 
     if (event.type === 'touchstart') {
         touchStartX = touchX;
         touchStartY = touchY;
+        hasMoved = false;  // Reset the hasMoved flag when a new touch starts
     } else if (event.type === 'touchmove') {
         touchEndX = touchX;
         touchEndY = touchY;
+        hasMoved = true;  // Set the hasMoved flag when a touchmove event occurs
     } else if (event.type === 'touchend') {
+        if (!hasMoved) {
+            return;  // If no touchmove event has occurred, ignore the touchend event
+        }
+
         const deltaX = touchEndX - touchStartX;
         const deltaY = touchEndY - touchStartY;
         const absDeltaX = Math.abs(deltaX);
         const absDeltaY = Math.abs(deltaY);
 
         if (absDeltaX < swipeThreshold && absDeltaY < swipeThreshold) {
-            return; // Ignore slight movements
+            return;
         } 
 
         if (absDeltaX > absDeltaY) {
-            // Horizontal swipe
             if (deltaX > 0 && isEffectiveMoveRight()) {
                 moveRight();
                 console.log('Move Right executed');
@@ -74,7 +77,6 @@ function handleSwipeMove(event) {
                 });
             }
         } else {
-            // Vertical swipe
             if (deltaY > 0 && isEffectiveMoveDown()) {
                 moveDown();
                 console.log('Move Down executed');
@@ -95,6 +97,7 @@ function handleSwipeMove(event) {
         }
     }
 }
+
 
 async function moveLeft() {
     // Step 1: Perform all movements
