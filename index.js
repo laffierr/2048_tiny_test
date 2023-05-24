@@ -5,6 +5,8 @@ import slide from './happy.NIU/slide.js';
 import handleKeydown from './happy.NIU/handelKeydown.js';
 //Yable: import handleSwipeMove 
 import handleSwipeMove from './happy.NIU/handleSwipeMove.js'
+import { highScore } from './happy.NIU/highScore.js';
+
 //Yable: import GyroscopeControl
 import { handleOrientation, requestOrientationPermission } from './happy.NIU/GyroscopeControl.js';
 // 创建一个4*4的二维数组作为棋盘
@@ -20,6 +22,9 @@ export const shareGameOver = {
 // 定义同时导出
 export const restart = document.getElementById('btn_content');
 export const board = document.getElementById('square_container');
+
+export const highScoreText = document.getElementById('high_score')
+
 
 //gyroscope status
 export var isGyroscopeEnabled = false;
@@ -78,28 +83,14 @@ export function gameStart() {
         console.log('restart');
         init();
     })
-
-}
-
-// 更新游戏面板
-function boxRef() {
     
 }
 
 
-// 计算分数 分数是所有进行合并的方块的值的和
-function scoreCal() {
-
-}
-
 // 高级功能：
 
-// 做手机的适配：：：最优先
-
-// 实现微信小程序搭载
-// 实现陀螺仪调用
-
 // 优化判断游戏是否结束的遍历算法
+
 // 保存每次游玩的进度
 // 实现分数上传功能
 // 最高分?

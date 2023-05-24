@@ -1,5 +1,4 @@
 import * as index from '../index.js'
-// import { gameBox,shareScore } from './index.js';
 import slide from './slide.js';
 
 let gameBoardElement = document.getElementById('body_content')

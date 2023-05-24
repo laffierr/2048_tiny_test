@@ -57,7 +57,22 @@ body {
     font-size: 3.6vw;
     /* font-size: 20px; */
     background-color: #7a5f41c7;
-    margin-right: 3.6vw;  /* Add a 20 pixel gap to the right */
+    margin: 1.8vw;  /* Add a 20 pixel gap to the right */
+
+}
+
+#high_score {
+    height: 9.9vw;
+    width: 24.3vw;
+        
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-weight: bold;
+    font-size: 3.6vw;
+    margin: 1.8vw;  /* Add a 20 pixel gap to the right */
 }
 #gyro-toggle{
     height: 9.9vw;
@@ -70,8 +85,8 @@ body {
     font-weight: bold;
     font-size: 3.6vw;
     background-color: #7a5f41c7;
-    margin-right: 3.6vw;  /* Add a 20 pixel gap to the right */
-    
+    margin: 1.8vw;  /* Add a 20 pixel gap to the right */
+
 }
 
 
@@ -228,9 +243,23 @@ body {
         font-weight: bold;
         font-size: 10px;
         background-color: #7a5f41c7;
-        margin-right: 10px;  /* Add a 20 pixel gap to the right */
-        
+        margin: 5px;  /* Add a 20 pixel gap to the right */
     }
+
+    #high_score {
+        height: 27.5px;
+        width: 67.5px;
+         
+        /* text-align: center; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        font-weight: bold;
+        font-size: 10px;
+        margin: 5px;  /* Add a 20 pixel gap to the right */
+    }
+    
     #gyro-toggle{
         height: 27.5px;
         width: 67.5px;
@@ -242,8 +271,7 @@ body {
         font-weight: bold;
         font-size: 10px;
         background-color: #7a5f41c7;
-        margin-right: 10px;  /* Add a 20 pixel gap to the right */
-        
+        margin: 5px;  /* Add a 20 pixel gap to the right */
     }
     
     #score_container {
@@ -383,9 +411,23 @@ body {
         font-weight: bold;
         font-size: 12px;
         background-color: #7a5f41c7;
-        margin-right: 12px;  /* Add a 20 pixel gap to the right */
-        
+        margin: 6px;  /* Add a 20 pixel gap to the right */
     }
+
+    #high_score {
+        height: 33px;
+        width: 81px;
+        
+        /* text-align: center; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        font-weight: bold;
+        font-size: 12px;
+        margin: 6px;  /* Add a 20 pixel gap to the right */
+    }
+
     #gyro-toggle{
         height: 33px;
         width: 81px;
@@ -397,8 +439,8 @@ body {
         font-weight: bold;
         font-size: 12px;
         background-color: #7a5f41c7;
-        margin-right: 12px;  /* Add a 20 pixel gap to the right */
-        
+        margin: 6px;  /* Add a 20 pixel gap to the right */
+
     }
     
     #score_container {
@@ -536,8 +578,21 @@ body {
         font-weight: bold;
         font-size: 20px;
         background-color: #7a5f41c7;
-        margin-right: 20px;  /* Add a 20 pixel gap to the right */
+        margin: 10px;  /* Add a 20 pixel gap to the right */
+    }
+
+    #high_score {
+        height: 55px;
+        width: 135px;
+                
+        /* text-align: center; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
         
+        font-weight: bold;
+        font-size: 20px;
+        margin: 10px;  /* Add a 20 pixel gap to the right */
     }
 
     #gyro-toggle{
@@ -551,8 +606,7 @@ body {
         font-weight: bold;
         font-size: 20px;
         background-color: #7a5f41c7;
-        margin-right: 20px;  /* Add a 20 pixel gap to the right */
-        
+        margin: 10px;  /* Add a 20 pixel gap to the right */
     }
     
     #score_container {

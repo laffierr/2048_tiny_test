@@ -1,6 +1,7 @@
 import * as index from '../index.js'
-// import { gameBox,shareScore } from './index.js';
 import slide from './slide.js';
+
+import * as HS from './highScore.js'
 
 //Yable: set delay time to let animation of merge and move go first, then create new squares.
 //Otherwise, the generated new square will also move.
@@ -35,7 +36,7 @@ function handleKeydown(event) {
                 moveLeft();
                 console.log('Move Left executed')
                 // delay the slide until the animation is complete
-                delay(300).then(function() {
+                delay(200).then(function() {
                     slide();
                     console.log('slide complete')
                     });
@@ -47,7 +48,7 @@ function handleKeydown(event) {
             if (isEffectiveMoveUp()) {
                 moveUp();
                 console.log('Move Up executed')
-                delay(300).then(function() {
+                delay(200).then(function() {
                     slide();
                     console.log('slide complete')
                     });
@@ -59,7 +60,7 @@ function handleKeydown(event) {
             if (isEffectiveMoveDown()) {
                 moveDown()
                 console.log('Move Down executed')
-                delay(300).then(function() {
+                delay(200).then(function() {
                     slide();
                     console.log('slide complete')
                     });
@@ -71,7 +72,7 @@ function handleKeydown(event) {
             if (isEffectiveMoveRight()) {
                 moveRight();
                 console.log('Move Right executed')
-                delay(300).then(function() {
+                delay(200).then(function() {
                     slide();
                     console.log('slide complete')
                     });
@@ -163,8 +164,14 @@ async function moveLeft() {
             if (targetSquare && currentSquare.value === targetSquare.value) {
                 index.gameBox[row][col - 1].value *= 2;
                 index.gameBox[row][col - 1].element.textContent = index.gameBox[row][col - 1].value;
+
                 index.shareScore.score += index.gameBox[row][col - 1].value;
                 document.getElementById("score_content").innerText = index.shareScore.score;
+
+                // 增加最高分的判断
+                HS.ifHighScore(index.shareScore.score);
+                index.highScoreText.innerHTML = HS.highScore;
+
                 currentSquare.element.remove();
                 index.gameBox[row][col] = null;
 
@@ -266,6 +273,11 @@ async function moveRight() {
                 index.gameBox[row][col + 1].element.textContent = index.gameBox[row][col + 1].value;
                 index.shareScore.score += index.gameBox[row][col + 1].value;
                 document.getElementById("score_content").innerText = index.shareScore.score;
+
+                // 增加最高分的判断
+                HS.ifHighScore(index.shareScore.score);
+                index.highScoreText.innerHTML = HS.highScore;
+
                 currentSquare.element.remove();
                 index.gameBox[row][col] = null;
 
@@ -402,6 +414,11 @@ async function moveUp() {
                 index.gameBox[row - 1][col].element.textContent = index.gameBox[row - 1][col].value;
                 index.shareScore.score += index.gameBox[row - 1][col].value;
                 document.getElementById("score_content").innerText = index.shareScore.score;
+
+                // 增加最高分的判断
+                HS.ifHighScore(index.shareScore.score);
+                index.highScoreText.innerHTML = HS.highScore;
+
                 currentSquare.element.remove();
                 index.gameBox[row][col] = null;
 
@@ -536,6 +553,11 @@ async function moveDown() {
                 index.gameBox[row + 1][col].element.textContent = index.gameBox[row + 1][col].value;
                 index.shareScore.score += index.gameBox[row + 1][col].value;
                 document.getElementById("score_content").innerText = index.shareScore.score;
+
+                // 增加最高分的判断
+                HS.ifHighScore(index.shareScore.score);
+                index.highScoreText.innerHTML = HS.highScore;
+
                 currentSquare.element.remove();
                 index.gameBox[row][col] = null;
 
