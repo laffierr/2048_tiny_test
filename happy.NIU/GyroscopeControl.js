@@ -41,7 +41,7 @@ export function handleOrientation(event) {
     var gammaSpeed = deltaGamma / deltaTime * 1000; // in degrees per second
     var betaSpeed = deltaBeta / deltaTime * 1000; // in degrees per second
 
-    var speedThreshold = 150; // adjust as needed
+    var speedThreshold = 800; // adjust as needed
 
     if (Math.abs(gammaSpeed) > Math.abs(betaSpeed)) {
         // Gamma speed is greater: horizontal movement
@@ -53,7 +53,7 @@ export function handleOrientation(event) {
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(600).then(function() {  // Wait 500ms (or another suitable duration) before clearing the cool-down state
+                    delay(500).then(function() {  // Wait 500ms (or another suitable duration) before clearing the cool-down state
                         coolDown = false;
                     });
                 });
@@ -66,7 +66,7 @@ export function handleOrientation(event) {
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(600).then(function() {
+                    delay(500).then(function() {
                         coolDown = false;
                     });
                 });
@@ -82,7 +82,7 @@ export function handleOrientation(event) {
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(600).then(function() {
+                    delay(500).then(function() {
                         coolDown = false;
                     });
                 });
@@ -95,7 +95,7 @@ export function handleOrientation(event) {
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(600).then(function() {
+                    delay(500).then(function() {
                         coolDown = false;
                     });
                 });
