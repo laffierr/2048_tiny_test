@@ -59,7 +59,7 @@ function handleSwipeMove(event) {
             if (deltaX > 0 && isEffectiveMoveRight()) {
                 moveRight();
                 console.log('Move Right executed');
-                vibrate
+                vibrate()
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
@@ -67,6 +67,7 @@ function handleSwipeMove(event) {
             } else if (deltaX < 0 && isEffectiveMoveLeft()) {
                 moveLeft();
                 console.log('Move Left executed');
+                vibrate()
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
@@ -77,7 +78,7 @@ function handleSwipeMove(event) {
             if (deltaY > 0 && isEffectiveMoveDown()) {
                 moveDown();
                 console.log('Move Down executed');
-                vibrate
+                vibrate()
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
@@ -85,7 +86,7 @@ function handleSwipeMove(event) {
             } else if (deltaY < 0 && isEffectiveMoveUp()) {
                 moveUp();
                 console.log('Move Up executed');
-                vibrate
+                vibrate()
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');

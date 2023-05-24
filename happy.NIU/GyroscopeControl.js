@@ -42,7 +42,7 @@ export function handleOrientation(event) {
     var gammaSpeed = deltaGamma / deltaTime * 1000; // in degrees per second
     var betaSpeed = deltaBeta / deltaTime * 1000; // in degrees per second
 
-    var speedThreshold = 200; // adjust as needed
+    var speedThreshold = 150; // adjust as needed
     // According to our impirical experience, moving down is usually harder
 
     if (Math.abs(gammaSpeed) > Math.abs(betaSpeed)) {
@@ -51,12 +51,12 @@ export function handleOrientation(event) {
             if (isEffectiveMoveRight()) {
                 moveRight();
                 console.log('Move Right executed');
-                coolDown = true;  // Set the cool-down state
                 vibrate()
+                coolDown = true;  // Set the cool-down state
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(100).then(function() {  // Wait 500ms (or another suitable duration) before clearing the cool-down state
+                    delay(150).then(function() {  // Wait 500ms (or another suitable duration) before clearing the cool-down state
                         coolDown = false;
                     });
                 });
@@ -65,12 +65,12 @@ export function handleOrientation(event) {
             if (isEffectiveMoveLeft()) {
                 moveLeft();
                 console.log('Move Left executed');
-                coolDown = true;  // Set the cool-down state
                 vibrate()
+                coolDown = true;  // Set the cool-down state
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(100).then(function() {
+                    delay(150).then(function() {
                         coolDown = false;
                     });
                 });
@@ -82,12 +82,12 @@ export function handleOrientation(event) {
             if (isEffectiveMoveDown()) {
                 moveDown();
                 console.log('Move Down executed');
-                coolDown = true;  // Set the cool-down state
                 vibrate()
+                coolDown = true;  // Set the cool-down state
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(100).then(function() {
+                    delay(150).then(function() {
                         coolDown = false;
                     });
                 });
@@ -96,12 +96,12 @@ export function handleOrientation(event) {
             if (isEffectiveMoveUp()) {
                 moveUp();
                 console.log('Move Up executed');
-                coolDown = true;  // Set the cool-down state
                 vibrate()
+                coolDown = true;  // Set the cool-down state
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
-                    delay(100).then(function() {
+                    delay(150).then(function() {
                         coolDown = false;
                     });
                 });
