@@ -1,6 +1,7 @@
 import * as index from '../index.js'
 // import { gameBox,shareScore } from './index.js';
 import slide from './slide.js';
+import vibrate from './vibrate.js'
 
 //Ask browser for gyroscope permission
 export function requestOrientationPermission() {
@@ -51,6 +52,7 @@ export function handleOrientation(event) {
                 moveRight();
                 console.log('Move Right executed');
                 coolDown = true;  // Set the cool-down state
+                vibrate()
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
@@ -64,6 +66,7 @@ export function handleOrientation(event) {
                 moveLeft();
                 console.log('Move Left executed');
                 coolDown = true;  // Set the cool-down state
+                vibrate()
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
@@ -80,6 +83,7 @@ export function handleOrientation(event) {
                 moveDown();
                 console.log('Move Down executed');
                 coolDown = true;  // Set the cool-down state
+                vibrate()
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
@@ -93,6 +97,7 @@ export function handleOrientation(event) {
                 moveUp();
                 console.log('Move Up executed');
                 coolDown = true;  // Set the cool-down state
+                vibrate()
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
