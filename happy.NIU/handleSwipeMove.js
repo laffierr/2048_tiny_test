@@ -1,6 +1,7 @@
 import * as index from '../index.js'
 import slide from './slide.js';
 import * as HS from './highScore.js'
+import vibrate from './vibrate.js'
 
 let gameBoardElement = document.getElementById('body_content')
 // Calculate the boundaries of the game board
@@ -58,6 +59,7 @@ function handleSwipeMove(event) {
             if (deltaX > 0 && isEffectiveMoveRight()) {
                 moveRight();
                 console.log('Move Right executed');
+                vibrate()
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
@@ -65,6 +67,7 @@ function handleSwipeMove(event) {
             } else if (deltaX < 0 && isEffectiveMoveLeft()) {
                 moveLeft();
                 console.log('Move Left executed');
+                vibrate()
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
@@ -75,6 +78,7 @@ function handleSwipeMove(event) {
             if (deltaY > 0 && isEffectiveMoveDown()) {
                 moveDown();
                 console.log('Move Down executed');
+                vibrate()
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
@@ -82,6 +86,7 @@ function handleSwipeMove(event) {
             } else if (deltaY < 0 && isEffectiveMoveUp()) {
                 moveUp();
                 console.log('Move Up executed');
+                vibrate()
                 delay(300).then(function() {
                     slide();
                     console.log('slide complete');
