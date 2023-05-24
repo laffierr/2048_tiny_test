@@ -75,7 +75,7 @@ export function handleOrientation(event) {
         }
     } else {
         // Beta speed is greater: vertical movement
-        if (betaSpeed > movingDownThreshold) {
+        if (betaSpeed > speedThreshold) {
             if (isEffectiveMoveDown()) {
                 moveDown();
                 console.log('Move Down executed');
