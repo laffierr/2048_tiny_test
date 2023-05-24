@@ -1,6 +1,5 @@
 import * as index from '../index.js'
 import slide from './slide.js';
-
 import * as HS from './highScore.js'
 
 //Yable: set delay time to let animation of merge and move go first, then create new squares.

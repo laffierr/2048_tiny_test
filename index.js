@@ -33,6 +33,7 @@ export var gyroStatus = document.getElementById("gyro-status");
 
 // 创建方块对象
 // 对象名：square
+// class Square {
 export class Square {
     constructor (value,element,row,col) {
         this.value = value;

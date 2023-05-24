@@ -1,6 +1,6 @@
 import * as index from '../index.js'
-// import { gameBox,shareScore } from './index.js';
 import slide from './slide.js';
+import * as HS from './highScore.js'
 
 //Ask browser for gyroscope permission
 export function requestOrientationPermission() {
@@ -152,6 +152,11 @@ async function moveLeft() {
               index.gameBox[row][col - 1].element.textContent = index.gameBox[row][col - 1].value;
               index.shareScore.score += index.gameBox[row][col - 1].value;
               document.getElementById("score_content").innerText = index.shareScore.score;
+
+              // 增加最高分的判断
+              HS.ifHighScore(index.shareScore.score);
+              index.highScoreText.innerHTML = HS.highScore;
+
               currentSquare.element.remove();
               index.gameBox[row][col] = null;
 
@@ -253,6 +258,11 @@ async function moveRight() {
               index.gameBox[row][col + 1].element.textContent = index.gameBox[row][col + 1].value;
               index.shareScore.score += index.gameBox[row][col + 1].value;
               document.getElementById("score_content").innerText = index.shareScore.score;
+
+              // 增加最高分的判断
+              HS.ifHighScore(index.shareScore.score);
+              index.highScoreText.innerHTML = HS.highScore;
+
               currentSquare.element.remove();
               index.gameBox[row][col] = null;
 
@@ -389,6 +399,11 @@ async function moveUp() {
               index.gameBox[row - 1][col].element.textContent = index.gameBox[row - 1][col].value;
               index.shareScore.score += index.gameBox[row - 1][col].value;
               document.getElementById("score_content").innerText = index.shareScore.score;
+
+              // 增加最高分的判断
+              HS.ifHighScore(index.shareScore.score);
+              index.highScoreText.innerHTML = HS.highScore;
+
               currentSquare.element.remove();
               index.gameBox[row][col] = null;
 
@@ -523,6 +538,11 @@ async function moveDown() {
               index.gameBox[row + 1][col].element.textContent = index.gameBox[row + 1][col].value;
               index.shareScore.score += index.gameBox[row + 1][col].value;
               document.getElementById("score_content").innerText = index.shareScore.score;
+
+              // 增加最高分的判断
+              HS.ifHighScore(index.shareScore.score);
+              index.highScoreText.innerHTML = HS.highScore;
+
               currentSquare.element.remove();
               index.gameBox[row][col] = null;
 
