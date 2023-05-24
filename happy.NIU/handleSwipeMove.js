@@ -56,58 +56,32 @@ function handleSwipeMove(event) {
             // Horizontal swipe
             if (deltaX > 0 && isEffectiveMoveRight()) {
                 moveRight();
-<<<<<<< HEAD
-                console.log('Move Right executed')
-                delay(200).then(function() {
-=======
                 console.log('Move Right executed');
                 delay(300).then(function() {
->>>>>>> 198a4d59ab48ecc6c441b53f52b48afe9e2d1bcb
                     slide();
                     console.log('slide complete');
                 });
             } else if (deltaX < 0 && isEffectiveMoveLeft()) {
                 moveLeft();
-<<<<<<< HEAD
-                console.log('Move Left executed')
-                // delay the slide until the animation is complete
-                delay(200).then(function() {
-=======
                 console.log('Move Left executed');
                 delay(300).then(function() {
->>>>>>> 198a4d59ab48ecc6c441b53f52b48afe9e2d1bcb
                     slide();
                     console.log('slide complete');
                 });
             }
         } else {
             // Vertical swipe
-<<<<<<< HEAD
-            if (deltaY > 0) {
-                // Swipe down
-                //Yable: Detect if the move is an effective move
-                if (isEffectiveMoveDown()) {
-                moveDown()
-                console.log('Move Down executed')
-                delay(200).then(function() {
-=======
             if (deltaY > 0 && isEffectiveMoveDown()) {
                 moveDown();
                 console.log('Move Down executed');
                 delay(300).then(function() {
->>>>>>> 198a4d59ab48ecc6c441b53f52b48afe9e2d1bcb
                     slide();
                     console.log('slide complete');
                 });
             } else if (deltaY < 0 && isEffectiveMoveUp()) {
                 moveUp();
-<<<<<<< HEAD
-                console.log('Move Up executed')
-                delay(200).then(function() {
-=======
                 console.log('Move Up executed');
                 delay(300).then(function() {
->>>>>>> 198a4d59ab48ecc6c441b53f52b48afe9e2d1bcb
                     slide();
                     console.log('slide complete');
                 });

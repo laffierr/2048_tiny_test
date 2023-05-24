@@ -57,7 +57,7 @@ body {
     font-size: 3.6vw;
     /* font-size: 20px; */
     background-color: #7a5f41c7;
-    margin-right: 3.6vw;  /* Add a 20 pixel gap to the right */
+    margin: 1.8vw;  /* Add a 20 pixel gap to the right */
 
 }
 
@@ -72,8 +72,7 @@ body {
     
     font-weight: bold;
     font-size: 3.6vw;
-    margin-right: 3.6vw;  /* Add a 20 pixel gap to the right */
-
+    margin: 1.8vw;  /* Add a 20 pixel gap to the right */
 }
 #gyro-toggle{
     height: 9.9vw;
@@ -86,7 +85,7 @@ body {
     font-weight: bold;
     font-size: 3.6vw;
     background-color: #7a5f41c7;
-    margin-right: 3.6vw;  /* Add a 20 pixel gap to the right */
+    margin: 1.8vw;  /* Add a 20 pixel gap to the right */
 
 }
 
@@ -244,7 +243,7 @@ body {
         font-weight: bold;
         font-size: 10px;
         background-color: #7a5f41c7;
-        margin-right: 10px;  /* Add a 20 pixel gap to the right */
+        margin: 5px;  /* Add a 20 pixel gap to the right */
     }
 
     #high_score {
@@ -258,7 +257,7 @@ body {
         
         font-weight: bold;
         font-size: 10px;
-        margin-right: 10px;  /* Add a 20 pixel gap to the right */
+        margin: 5px;  /* Add a 20 pixel gap to the right */
     }
     
     #gyro-toggle{
@@ -272,7 +271,7 @@ body {
         font-weight: bold;
         font-size: 10px;
         background-color: #7a5f41c7;
-        margin-right: 10px;  /* Add a 20 pixel gap to the right */
+        margin: 5px;  /* Add a 20 pixel gap to the right */
     }
     
     #score_container {
@@ -412,7 +411,7 @@ body {
         font-weight: bold;
         font-size: 12px;
         background-color: #7a5f41c7;
-        margin-right: 12px;  /* Add a 20 pixel gap to the right */
+        margin: 6px;  /* Add a 20 pixel gap to the right */
     }
 
     #high_score {
@@ -426,7 +425,7 @@ body {
         
         font-weight: bold;
         font-size: 12px;
-        margin-right: 12px;  /* Add a 20 pixel gap to the right */
+        margin: 6px;  /* Add a 20 pixel gap to the right */
     }
 
     #gyro-toggle{
@@ -440,7 +439,7 @@ body {
         font-weight: bold;
         font-size: 12px;
         background-color: #7a5f41c7;
-        margin-right: 12px;  /* Add a 20 pixel gap to the right */
+        margin: 6px;  /* Add a 20 pixel gap to the right */
 
     }
     
@@ -579,13 +578,12 @@ body {
         font-weight: bold;
         font-size: 20px;
         background-color: #7a5f41c7;
-        margin-right: 20px;  /* Add a 20 pixel gap to the right */
+        margin: 10px;  /* Add a 20 pixel gap to the right */
     }
 
     #high_score {
         height: 55px;
         width: 135px;
-        background-color: #7a5f41c7;
                 
         /* text-align: center; */
         display: flex;
@@ -594,7 +592,7 @@ body {
         
         font-weight: bold;
         font-size: 20px;
-        margin-right: 20px;  /* Add a 20 pixel gap to the right */
+        margin: 10px;  /* Add a 20 pixel gap to the right */
     }
 
     #gyro-toggle{
@@ -608,7 +606,7 @@ body {
         font-weight: bold;
         font-size: 20px;
         background-color: #7a5f41c7;
-        margin-right: 20px;  /* Add a 20 pixel gap to the right */
+        margin: 10px;  /* Add a 20 pixel gap to the right */
     }
     
     #score_container {
