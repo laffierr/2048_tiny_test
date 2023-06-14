@@ -54,14 +54,14 @@ This is a 2048 game project written using HTML, CSS, and ES6 standard JavaScript
 
 ```bash
 git clone https://github.com/laffierr/2048_tiny_test.git
-` ` `
+```
 
 2. Go to the project directory and open the 'index.html' file.
 
 ```bash
 cd 2048_tiny_test
 open index.html
-` ` `
+```
 
 3. The game will load and display in the browser.
 
