@@ -7,7 +7,7 @@
 1. 克隆或下载本仓库到本地计算机。
 
     ```bash
-git clone https://github.com/laffierr/2048_tiny_test.git
+    git clone https://github.com/laffierr/2048_tiny_test.git
     ```
 
 2. 进入项目目录并打开 `index.html` 文件。
