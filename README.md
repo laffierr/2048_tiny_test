@@ -1,39 +1,90 @@
-# 2048_tiny_test
-A test
+# 2048 游戏项目
 
-用js,html和css,通过ES6模块化实现网页端的2048游戏
+这是一个使用 HTML、CSS 和 使用ES6标准JavaScript 编写的 2048 游戏项目。
+
+## 如何使用
+
+1. 克隆或下载本仓库到本地计算机。
+
+    ```bash
+git clone https://github.com/laffierr/2048_tiny_test.git
+    ```
+
+2. 进入项目目录并打开 `index.html` 文件。
+
+    ```bash
+    cd 2048_tiny_test
+    open index.html
+    ```
+
+3. 游戏将在浏览器中加载并显示。
+
+4. 使用方向键或滑动手势（在手机上）来控制方块的移动。
+
+6. 你可以手动控制是否重新开始游戏。
+
+## 技术栈
+
+- HTML
+- CSS
+- JavaScript (ES6)
+
+## 主要功能
+
+- 方块的生成、划动和合并的逻辑和动画
+- 记录当前浏览器的最高分数
+- 手动重新开始游戏
+- 支持在电脑浏览器和手机上使用
+- 在手机上通过陀螺仪操控(可选)
+
+## 浏览器支持
+
+- 最新版本的 Chrome、Firefox、Safari 和 Edge 浏览器
+
+欢迎提供任何有关改进游戏功能或优化代码的建议和贡献！
 
 
-index.js:包含了游戏主体和方块对象生成。
+# 2048 Game project
 
-init.js:包含数组，分数，游戏状态的初始化，生成两个初始方块。
+This is a 2048 game project written using HTML, CSS, and ES6 standard JavaScript.
 
-squareCreate.js:生成方块的函数，包括棋盘空位置的遍历，新方块在网页上的位置
+## How to use
 
-handleKeydown.js:判断每次划动是否有效，并进行方块滑动或合并的逻辑处理和动画处理。
+1. Clone or download the repository to a local computer.
 
-slide.js:方块进行滑动后的事件函数，其中包括新方块的生成，游戏是否结束的判断。应更名为afterMove.js
+```bash
+git clone https://github.com/laffierr/2048_tiny_test.git
+` ` `
 
+2. Go to the project directory and open the 'index.html' file.
 
-游戏逻辑：页面加载完成后开始游戏，初始化。如果监听到动作就调用handleKetDown函数。每次划动过后判断游戏是否结束。
+```bash
+cd 2048_tiny_test
+open index.html
+` ` `
 
+3. The game will load and display in the browser.
 
-目前遇到的问题：2048的动画应该是先进行所有方块的滑动，再处理可能有的方块合并。
-但是handleKeydown中的遍历方法导致会对某一行或者某一列进行遍历，处理这一行或者这一列的滑动和遍历。也就是说必须等某一行可能的合并执行之后才能进行下一行的滑动或合并。
-这和2048的动画不同：正常应该是所有方块全部滑动结束后在进行方块的合并。
+4. Use the arrow keys or swipe gestures (on your phone) to control the movement of the block.
 
-Implementing the 2048 game on the web using js, html, and css, through ES6 modularization.
+6. You can manually restart the game.
 
-index.js: Contains the main game and the generation of square objects.
+## Technology stack
 
-init.js: Includes array, score, game state initialization, and generates two initial squares.
+- HTML
+- CSS
+- JavaScript (ES6)
 
-squareCreate.js: The function for generating squares, which includes traversing empty positions on the game board, and the position of the new square on the web page.
+## Main function
 
-handleKeydown.js: It determines whether each swipe is valid, and performs the logic processing and animation of square sliding or merging.
+- Logic and animation for block generation, swiping and merging
+- Record the highest score of the current browser
+- Restart the game manually
+- Supports use on computer browsers and mobile phones
+- Gyroscopic control on mobile (optional)
 
-slide.js: The event function after the square slides, which includes the generation of new squares and the judgment of whether the game ends. It should be renamed as afterMove.js.
+## Browser support
 
-Game Logic: After the page loads, the game starts and initializes. If an action is detected, it calls the handleKeyDown function. After each swipe, it determines whether the game ends.
+- Latest versions of Chrome, Firefox, Safari and Edge
 
-Current Issues: The animation of 2048 should first carry out all square slides, then process possible square merges. However, the traversal method in handleKeydown causes traversal of a row or column, and processes the slide and merge of this row or column. That is to say, it must wait for the possible merging of a row to execute before the next row can slide or merge. This is different from the animation of 2048: normally all squares should finish sliding before the squares merge.
+Any suggestions and contributions for improving the game's features or optimizing the code are welcome!
